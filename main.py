@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-# 1. SETUP HALAMAN
+# 1. SETUP HALAMAN & TEMA UTAMA
 st.set_page_config(page_title="1 Destiny - Client Management Dashboard", layout="wide", page_icon="👰")
 
-# Custom CSS Estetika
+# Custom CSS Estetika & Format Kardus Harga
 st.markdown("""
     <style>
     .main {background-color: #f8f9fa;}
@@ -15,13 +15,13 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Fungsi pembantu untuk memformat angka menjadi Rupiah
+# Fungsi pembantu untuk memformat angka menjadi Rupiah (Contoh: Rp 110.499.000)
 def format_rupiah(angka):
     if isinstance(angka, (int, float)):
         return f"Rp {angka:,.0f}".replace(",", ".")
     return str(angka)
 
-# DATA DATABASE INTERNAL PRICELIST 2026
+# 2. DATABASE INTERNAL PRICELIST 2026 (Sesuai Brosur Resmi)
 PRICELIST_PACKAGES = {
     "Exclude Venue & Catering": [
         {
@@ -60,10 +60,14 @@ VENUE_PACKAGES = [
     {"Kota": "Jakarta", "Nama": "Griyo Kulo *", "Prices": {"100pax": 71799000, "200pax": 80799000, "300pax": 89799000}, "Kapasitas": 500, "Tipe": "Small"},
     {"Kota": "Jakarta", "Nama": "Aroem Mahakam *", "Prices": {"100pax": 93549000, "200pax": 118149000, "300pax": 142749000}, "Kapasitas": 300, "Tipe": "Small"},
     {"Kota": "Jakarta", "Nama": "Aleesha", "Prices": {"100pax": 88500000, "200pax": 98500000, "300pax": 108500000}, "Kapasitas": 400, "Tipe": "Small"},
-    {"Kota": "Jakarta", "Nama": "Casakhasa", "Prices": {"100pax": 153799000, "200pax": 163799000, "300pax": 173799000}, "Kapasitas": 400, "Tipe": "Small"}
+    {"Kota": "Jakarta", "Nama": "Casakhasa", "Prices": {"100pax": 153799000, "200pax": 163799000, "300pax": 173799000}, "Kapasitas": 400, "Tipe": "Small"},
+    {"Kota": "Jakarta", "Nama": "D'Hall Kementerian Pertanian", "Prices": {"400pax": 163799000, "500pax": 173799000}, "Kapasitas": 700, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "Soho Pancoran Ballroom", "Prices": {"400pax": 173799000, "500pax": 183799000}, "Kapasitas": 700, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "Felfest UI", "Prices": {"400pax": 190799000, "500pax": 200799000}, "Kapasitas": 800, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "Taman Kajoe", "Prices": {"400pax": 209799000, "500pax": 222799000}, "Kapasitas": 1000, "Tipe": "Medium"}
 ]
 
-# DATA VENDOR REKANAN RESMI (SESUAI SCREENSHOT)
+# 3. DATABASE VENDOR REKANAN RESMI
 VENDOR_LIST = [
     {"Kategori": "Wedding planner/organizer", "Nama Vendor": "1 Destiny Wedding Organizer", "Instagram Link": "https://www.instagram.com/1destiny.wo/"},
     {"Kategori": "Documentation", "Nama Vendor": "Aestec", "Instagram Link": "https://www.instagram.com/aestec.wedding/"},
@@ -78,7 +82,7 @@ VENDOR_LIST = [
     {"Kategori": "Entertainment (Optional)", "Nama Vendor": "SWAG Project", "Instagram Link": "https://www.instagram.com/swag_project?igsh=a3A5YzgyZ3V3ZXBz"}
 ]
 
-# INITIALIZE DATABASE CLIENT DI MEMORI APP
+# 4. INITIALIZE SIMULASI DATABASE KLIEN DI SESSION STATE
 if 'client_db' not in st.session_state:
     st.session_state.client_db = [
         {
@@ -86,36 +90,66 @@ if 'client_db' not in st.session_state:
             "WhatsApp": "6281234567890", "Email": "siti.budi@email.com", "Instagram": "@siti_aliyah",
             "Tanggal Pernikahan": "2026-12-12", "Kota": "Jakarta", "Jenis Acara": "Akad Nikah - Resepsi",
             "Estimasi Tamu": "300", "Venue Status": "Sudah Survey Beberapa Venue", "Nama Venue": "Pejaten Terrace",
-            "Preference Venue": "Semi Outdoor", "Notes": "Butuh katering Blessing dan MC Mawadah."
+            "Preference Venue": "Semi Outdoor", "Notes": "Mencari dekorasi dengan tema floral natural."
         }
     ]
 
-# STRUKTUR MENU UTAMA SIDEBAR
+# 5. SIDEBAR UTAMA NAVIGATION
 st.sidebar.title("1 Destiny WO 2026")
 menu = st.sidebar.radio("Navigasi Konten:", [
     "📋 Lihat Summary Kebutuhan Klien", 
     "➕ Input Klien Baru (Form Skrining Baru)", 
     "💰 Lihat Price List Resmi 2026",
-    "🤝 Our Vendor List"
+    "🤝 Our Vendor List & Portfolio"
 ])
 
-# ==================== MENU: OUR VENDOR LIST (FITUR BARU) ====================
-if menu == "🤝 Our Vendor List":
-    st.subheader("🤝 1 Destiny Official Vendor List (2026)")
-    st.info("Klik nama link Instagram berwarna biru untuk langsung melihat portofolio vendor rekanan di tab baru.")
+# ==================== MENU: OUR VENDOR LIST & PORTFOLIO ====================
+if menu == "🤝 Our Vendor List & Portfolio":
+    st.subheader("🤝 1 Destiny Official Vendor List & Portfolio (2026)")
     
-    # Membuat format tampilan list agar link IG bisa di-klik langsung
-    formatted_vendors = []
-    for vendor in VENDOR_LIST:
-        formatted_vendors.append({
-            "Kategori": vendor["Kategori"],
-            "Nama Vendor Rekanan": vendor["Nama Vendor"],
-            "Instagram Link Portofolio": f'<a href="{vendor["Instagram Link"]}" target="_blank">Buka Instagram</a>'
-        })
+    tab_list, tab_galeri = st.tabs(["📋 Daftar Link Vendor", "📸 Galeri Foto Portfolio Terbaik"])
     
-    df_vendor = pd.DataFrame(formatted_vendors)
-    # Merender tabel HTML agar tautan <a> aktif
-    st.write(df_vendor.to_html(escape=False, index=False), unsafe_allow_html=True)
+    with tab_list:
+        st.info("Klik nama link Instagram berwarna biru untuk langsung melihat portofolio vendor rekanan di tab baru.")
+        formatted_vendors = []
+        for vendor in VENDOR_LIST:
+            formatted_vendors.append({
+                "Kategori": vendor["Kategori"],
+                "Nama Vendor Rekanan": vendor["Nama Vendor"],
+                "Instagram Link Portofolio": f'<a href="{vendor["Instagram Link"]}" target="_blank">Buka Instagram</a>'
+            })
+        df_vendor = pd.DataFrame(formatted_vendors)
+        st.write(df_vendor.to_html(escape=False, index=False), unsafe_allow_html=True)
+        
+    with tab_galeri:
+        st.markdown("### 🌟 Dokumentasi Real-Event Portfolio")
+        st.caption("Gunakan foto galeri di bawah ini sebagai referensi visual visualisasi tema acara ke calon pengantin.")
+        
+        # Grid 1: Baris Pertama (Foto 1 s/d 4)
+        c1, c2, c3, c4 = st.columns(4)
+        with c1: st.image("Dokumentasi1.jpg", caption="Portfolio Event 1", use_container_width=True)
+        with c2: st.image("Dokumentasi2.jpg", caption="Portfolio Event 2", use_container_width=True)
+        with c3: st.image("Dokumentasi3.jpg", caption="Portfolio Event 3", use_container_width=True)
+        with c4: st.image("Dokumentasi4.jpg", caption="Portfolio Event 4", use_container_width=True)
+        
+        # Grid 2: Baris Kedua (Foto 5 s/d 8)
+        c5, c6, c7, c8 = st.columns(4)
+        with c5: st.image("Dokumentasi5.jpg", caption="Portfolio Event 5", use_container_width=True)
+        with c6: st.image("Dokumentasi6.jpg", caption="Portfolio Event 6", use_container_width=True)
+        with c7: st.image("Dokumentasi7.jpg", caption="Portfolio Event 7", use_container_width=True)
+        with c8: st.image("Dokumentasi8.jpg", caption="Portfolio Event 8", use_container_width=True)
+        
+        # Grid 3: Baris Ketiga (Foto 9 s/d 12)
+        c9, c10, c11, c12 = st.columns(4)
+        with c9: st.image("Dokumentasi9.jpg", caption="Portfolio Event 9", use_container_width=True)
+        with c10: st.image("Dokumentasi10.jpg", caption="Portfolio Event 10", use_container_width=True)
+        with c11: st.image("Dokumentasi11.jpg", caption="Portfolio Event 11", use_container_width=True)
+        with c12: st.image("Dokumentasi12.jpg", caption="Portfolio Event 12", use_container_width=True)
+        
+        # Grid 4: Baris Keempat (Foto 13 s/d 14)
+        c13, c14, _, _ = st.columns(4)
+        with c13: st.image("Dokumentasi13.jpg", caption="Portfolio Event 13", use_container_width=True)
+        with c14: st.image("Dokumentasi14.jpg", caption="Portfolio Event 14", use_container_width=True)
 
 # ==================== MENU: LIHAT PRICELIST RESMI ====================
 elif menu == "💰 Lihat Price List Resmi 2026":
@@ -135,7 +169,8 @@ elif menu == "💰 Lihat Price List Resmi 2026":
             rows.append({
                 "Wilayah": v["Kota"], "Nama Venue": v["Nama"],
                 "100 Pax": format_rupiah(v["Prices"].get("100pax", "-")), "200 Pax": format_rupiah(v["Prices"].get("200pax", "-")),
-                "300 Pax": format_rupiah(v["Prices"].get("300pax", "-")), "Max Kapasitas": f"{v['Kapasitas']} pax"
+                "300 Pax": format_rupiah(v["Prices"].get("300pax", "-")), "400 Pax": format_rupiah(v["Prices"].get("400pax", "-")),
+                "500 Pax": format_rupiah(v["Prices"].get("500pax", "-")), "Max Kapasitas": f"{v['Kapasitas']} pax"
             })
         st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
@@ -153,7 +188,7 @@ elif menu == "➕ Input Klien Baru (Form Skrining Baru)":
             instagram = st.text_input("Instagram (Opsional)")
             st.markdown("#### 📅 Informasi Pernikahan")
             tgl_nikah = st.date_input("Kapan rencana tanggal pernikahan?", min_value=datetime.today())
-            kota = st.selectbox("Kota / Area Pernikahan", ["Jakarta", "Depok", "Tangerang & Tangsel", "Other:?"])
+            kota = st.selectbox("Kota / Area Pernikahan", ["Jakarta", "Depok", "Tangerang & Tangsel"])
             jenis_acara = st.selectbox("Jenis acara yang direncanakan", ["Akad Nikah - Resepsi", "Pemberkatan - Resepsi", "Akad Ramah tamah Only", "Pemberkatan Ramah Tamah", "Resepsi Only"])
         with col2:
             st.markdown("#### 🏰 Detail Acara & Venue")
@@ -166,6 +201,7 @@ elif menu == "➕ Input Klien Baru (Form Skrining Baru)":
             
         submit_btn = st.form_submit_button("🚀 Simpan Hasil Skrining")
         if submit_btn and p_wanita and p_pria:
+            # Otomatisasi pembentukan nama label tanpa perlu input manual
             auto_label = f"Skrining - {p_wanita.split()[0]} & {p_pria.split()[0]}"
             new_data = {
                 "Nama Klien": auto_label, "Pengantin Wanita": p_wanita, "Pengantin Pria": p_pria,
@@ -175,7 +211,7 @@ elif menu == "➕ Input Klien Baru (Form Skrining Baru)":
                 "Preference Venue": pref_venue, "Notes": notes
             }
             st.session_state.client_db.append(new_data)
-            st.success(f"🎉 Sukses! Tersimpan otomatis dengan Label: '{auto_label}'")
+            st.success(f"🎉 Sukses! Tersimpan otomatis dengan Label Klien: '{auto_label}'")
 
 # ==================== MENU: LIHAT SUMMARY KEBUTUHAN KLIEN ====================
 else:
@@ -202,26 +238,56 @@ else:
         st.warning("🏰 **Detail Acara & Venue**")
         st.write(f"• **Estimasi Tamu:** {client_data['Estimasi Tamu']} pax")
         st.write(f"• **Status Venue:** {client_data['Venue Status']}")
-        st.write(f"• **Nama Venue:** {client_data['Nama Venue']}")
+        st.write(f"• **Nama Venue:** {client_data['Nama Venue'] if client_data['Nama Venue'] else '-'}")
         st.write(f"• **Preferensi Vibe:** `{client_data['Preference Venue']}`")
         
     st.markdown("---")
     st.error(f"📝 **Notes Lainnya:** {client_data['Notes']}")
     
-    # RE-GENERATOR BRIEF WHATSAPP
+    # SYSTEM MATCHING PAKET REKOMENDASI OTOMATIS
+    st.markdown("---")
+    st.markdown("### 🤖 Hasil Analisis & Rekomendasi Paket 1 Destiny:")
+    
+    tamu_clean = f"{client_data['Estimasi Tamu']}pax"
+    kota_klien = client_data['Kota']
+    
+    col_rec1, col_rec2 = st.columns(2)
+    with col_rec1:
+        st.markdown("#### 🏢 Pilihan Paket Include Venue & Catering")
+        match_found = False
+        for v in VENUE_PACKAGES:
+            if v["Kota"] == kota_klien and tamu_clean in v["Prices"]:
+                match_found = True
+                harga_paket = v["Prices"][tamu_clean]
+                st.markdown(f"⭐ **{v['Nama']}**")
+                st.markdown(f"<div class='price-tag'>Harga Paket All-In: {format_rupiah(harga_paket)}</div>", unsafe_allow_html=True)
+                with st.expander("👁️ Detail Isi Paket Include"):
+                    st.markdown(DETAIL_ALLIN_MEDIUM if v["Tipe"] == "Medium" else DETAIL_ALLIN_SMALL)
+        if not match_found:
+            st.write("_Tidak ada venue Include Venue & Catering resmi di brosur yang masuk kriteria area & kapasitas ini._")
+            
+    with col_rec2:
+        st.markdown("#### 📦 Pilihan Paket Exclude Venue & Catering")
+        st.markdown("**👉 Intimate Package (Up to 300 guests)**")
+        st.markdown(f"<div class='price-tag'>Harga Paket: {format_rupiah(51699000)}</div>", unsafe_allow_html=True)
+        with st.expander("👁️ Detail Isi Paket Exclude"):
+            for sub in PRICELIST_PACKAGES["Exclude Venue & Catering"][0]["Detail"]:
+                st.markdown(sub)
+
+    # BRIEF COPIER WA
     st.markdown("---")
     st.subheader("💬 Teks Briefing Siap Kirim ke WhatsApp Group Tim")
     brief_text = f"""*HASIL SKRINING KLIEN BARU - 1 DESTINY*
 ====================================
-• *Label Klien*  : {client_data['Nama Klien']}
-• *Pasangan*     : {client_data['Pengantin Wanita']} & {client_data['Pengantin Pria']}
-• *WhatsApp*     : https://wa.me/{client_data['WhatsApp']}
-• *Rencana Tgl*  : {client_data['Tanggal Pernikahan']}
-• *Kota/Area*    : {client_data['Kota']}
-• *Jenis Acara*  : {client_data['Jenis Acara']}
+• *Label Klien* : {client_data['Nama Klien']}
+• *Pasangan* : {client_data['Pengantin Wanita']} & {client_data['Pengantin Pria']}
+• *WhatsApp* : https://wa.me/{client_data['WhatsApp']}
+• *Rencana Tgl* : {client_data['Tanggal Pernikahan']}
+• *Kota/Area* : {client_data['Kota']}
+• *Jenis Acara* : {client_data['Jenis Acara']}
 • *Estimasi Tamu*: {client_data['Estimasi Tamu']} Pax
 • *Status Venue* : {client_data['Venue Status']} ({client_data['Nama Venue'] if client_data['Nama Venue'] else 'Belum ada'})
-• *Pref. Venue*  : {client_data['Preference Venue']}
+• *Pref. Venue* : {client_data['Preference Venue']}
 
 *📝 Catatan Tambahan:*
 "{client_data['Notes'] if client_data['Notes'] else '-'}"
