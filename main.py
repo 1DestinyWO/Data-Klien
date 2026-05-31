@@ -209,10 +209,30 @@ elif menu == "🤝 Our Vendor List & Portfolio":
         with c11: st.image("Dokumentasi12.jpg", use_container_width=True)
         with c12: st.image("Dokumentasi11.jpg", use_container_width=True)
         
-        c13, c14, _, _ = st.columns(4)
+        c13, c14, c15, c16 = st.columns(4)
         with c13: st.image("Dokumentasi13.jpg", use_container_width=True)
         with c14: st.image("Dokumentasi14.jpg", use_container_width=True)
+        with c15: st.image("Dokumentasi15.jpg", use_container_width=True)
+        with c16: st.image("Dokumentasi16.jpg", use_container_width=True)
 
+        c17, c18, c19, c20 = st.columns(4)
+        with c17: st.image("Dokumentasi17.jpg", use_container_width=True)
+        with c18: st.image("Dokumentasi18.jpg", use_container_width=True)
+        with c19: st.image("Dokumentasi19.jpg", use_container_width=True)
+        with c20: st.image("Dokumentasi20.jpg", use_container_width=True)
+
+        c21, c22, c23, c24 = st.columns(4)
+        with c21: st.image("Dokumentasi21.jpg", use_container_width=True)
+        with c22: st.image("Dokumentasi22.jpg", use_container_width=True)
+        with c23: st.image("Dokumentasi23.jpg", use_container_width=True)
+        with c24: st.image("Dokumentasi24.jpg", use_container_width=True)
+
+        c25, c26, c27, c28 = st.columns(4)
+        with c25: st.image("Dokumentasi25.jpg", use_container_width=True)
+        with c26: st.image("Dokumentasi26.jpg", use_container_width=True)
+        with c27: st.image("Dokumentasi27.jpg", use_container_width=True)
+        with c28: st.image("Dokumentasi28.jpg", use_container_width=True)
+            
 # ==================== MENU: LIHAT PRICELIST RESMI ====================
 elif menu == "💰 Lihat Price List Resmi 2026":
     st.subheader("📑 Katalog & Price List Resmi 1 Destiny (2026)")
