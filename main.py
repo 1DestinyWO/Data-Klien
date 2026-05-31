@@ -5,42 +5,96 @@ from datetime import datetime
 # 1. SETUP HALAMAN
 st.set_page_config(page_title="1 Destiny - Client Management Dashboard", layout="wide", page_icon="👰")
 
-# Custom CSS Estetika
+# Custom CSS Estetika & Format Tampilan Kardus Rekomendasi
 st.markdown("""
     <style>
     .main {background-color: #f8f9fa;}
     div[data-testid="stMetricValue"] {font-size: 22px; color: #1E88E5;}
     .stButton>button {background-color: #4CAF50; color: white; border-radius: 8px; width: 100%;}
-    .price-tag { background-color: #E8F5E9; padding: 10px; border-left: 5px solid #2E7D32; font-weight: bold; margin: 10px 0;}
+    .price-tag { background-color: #E8F5E9; padding: 12px; border-left: 5px solid #2E7D32; font-weight: bold; font-size: 18px; color: #1B5E20; margin: 10px 0;}
     </style>
     """, unsafe_allow_html=True)
 
-# 2. DATA DATABASE INTERNAL PRICELIST 2026 (Berdasarkan Brosur Anda)
+# Fungsi pembantu untuk memformat angka menjadi Rupiah (Contoh: Rp110.499.000)
+def format_rupiah(angka):
+    if isinstance(angka, (int, float)):
+        return f"Rp{angka:,.0f}".replace(",", ".")
+    return angka
+
+# 2. DATA DATABASE INTERNAL PRICELIST 2026 (Disamakan Persis Sesuai Brosur Anda)
 PRICELIST_PACKAGES = {
-    "Exclude Venue & Catering": [
-        {"Nama": "Intimate Package (Exclude)", "Harga": 51699000, "Tamu": "Maks. 300 pax", "Detail": "Planner (3x Progress, 1x TM), Dekor Backdrop 5m, Dokumentasi 6 Jam, MC Akad+Resepsi, MUA & Attire Bride/Groom + Orang Tua, 4 Crew WO on Day."},
-        {"Nama": "Full Wedding Package (Exclude)", "Harga": 75999000, "Tamu": "Maks. 600 pax", "Detail": "Planner (3x Progress, 1x TM), Pelaminan 8m, Dokumentasi 8 Jam, MC, MUA Premium, Entertainment (Singer + Keyboard/Guitar + Sound 2000W), 5-6 Crew WO on Day."}
+    "Exclude Venue & Catering (Paket Lepas)": [
+        {
+            "Nama": "Intimate Package", 
+            "Harga": 51699000, 
+            "Tamu": "Up to 300 guests", 
+            "Detail": """
+            • **Wedding Organizer & Planner:** Progress Meeting (3x), Offline Assist (3x), Technical Meeting (1x), Guidance Book, Rundown, Timeline, Unlimited consultation via WA, Snack TM, Handling KUA administration. Wo The Day: 1 Professional Wedding Manager + 4 Crew on the Day (6-8 Hours Worktime).
+            • **Decoration:** Backdrop up to 5m, Karpet permadani Set, Meja Kursi Akad, Standing Flower 2 pcs, Welcome Sign Kotak, Ampau 1 pcs, Bench Sofa Pengantin 1 pcs, Aisle Decoration (Wedding Gate), FREE Buku Tamu 2 pcs.
+            • **Documentation:** 1 Photographer, 1 Videographer, 1 Crew, 6 hours Photosession, Editing Photo, Video 3 s/d 5 Menit, All file On Flashdisk.
+            • **MC:** MC Akad/Pemberkatan - Resepsi (4-5 hours worktime, Free Transport).
+            • **MUA & Attire:** Makeup & Hairdo/Hijabdo Bride, Makeup Touch Up Groom, Makeup & Hairdo 2 Moms, Retouch Resepsi, Sepasang Baju Akad & Resepsi, 2 Baju Ayah & 2 Baju Ibu, FREE Fake Nail Art & Softlense Normal.
+            """
+        },
+        {
+            "Nama": "Full Wedding Package", 
+            "Harga": 75999000, 
+            "Tamu": "Up to 600 guests", 
+            "Detail": """
+            • **Wedding Organizer & Planner:** Progress Meeting (3x), Offline Assist (3x), Technical Meeting (1x), Guidance Book, Rundown, Timeline, Unlimited consultation via WA, Snack TM, Handling KUA administration. Wo The Day: 1 Professional Wedding Manager + 5-6 Crew on the Day (8 Hours Worktime).
+            • **Decoration (Pelaminan 8m):** Sofa Pelaminan 1 set, Pelaminan 8m, Karpet permadani, Tanaman pelaminan. Area Masuk: Welcome Sign, Kotak Ampau 2 pcs, Backdrop penerima tamu 2m, Pergola pintu masuk. Area Tengah: Set Meja kursi akad, Karpet jalan, Standing flower 6 pcs, Bunga pikok jalur jalan 8 titik, Lampu bunga 2 set, Lampu crystal 2 set, Photo Gallery 3 pcs.
+            • **Documentation:** 1 Photographer, 1 Videographer, 1 Crew, 8 hours Photosession, Editing Photo, Video 3 s/d 5 Menit, All file On Flashdisk.
+            • **Entertainment:** 1 Singer & 1 Keyboardist (atau 1 Singer & 1 Guitarist), Sound system 2000 watt.
+            • **MC:** MC Akad/Pemberkatan - Resepsi (4-5 hours worktime, Free Transport).
+            • **MUA & Attire:** Makeup & Hairdo Bride + Touch Up Groom, Makeup & Hairdo 2 Moms, Retouch Resepsi, Sepasang Baju Akad & Resepsi, 2 Baju Ayah & 2 Baju Ibu, FREE Fake Nail Art & Softlense Normal.
+            """
+        }
     ],
     "On The Day WO Services Only": [
-        {"Nama": "Acara Pendukung (Lamaran/Sangjit/Pengajian)", "Harga": 6500000, "Tamu": "Maks. 100 pax", "Detail": "1 PL, 3 Crew, 3x Progress Meeting, 1x TM, 5 jam kerja hari H."},
-        {"Nama": "Akad Intimate / Resepsi Only", "Harga": 8000000, "Tamu": "Maks. 200 pax", "Detail": "1 Manager, 4 Crew, 3x Online Progress, 2x Offline Assist, 1x TM, 6 jam kerja hari H."},
-        {"Nama": "Full Day (Akad & Resepsi)", "Harga": 10500000, "Tamu": "Maks. 800 pax", "Detail": "1 PL, 8 Crew, 5x Online Progress, 3x Offline Assist, 1x TM, 8 jam kerja hari H."}
+        {
+            "Nama": "Before Wedding Services (Lamaran, Pengajian, Sangjit, etc.)", 
+            "Harga": 6500000, 
+            "Tamu": "Maximal 100 pax", 
+            "Detail": "1 Professional Project Leader, 3 Project Crew, Progress Meeting (3x), Technical Meeting (1x), Transport (Jabodetabek), Guidance Book, 5 Hours Worktime on Wedding Day."
+        },
+        {
+            "Nama": "Intimate Wedding (Akad Intimate / Resepsi Only)", 
+            "Harga": 8000000, 
+            "Tamu": "Maximal 200 pax", 
+            "Detail": "Worked closely for two months prior. 1 Professional Wedding Manager, 4 Wedding Crew, Online Progress Meeting (3x), Offline Assist (2x), Technical Meeting (1x), Snack & Transport (Jabodetabek), Guidance Book & Wedding Report, 6 Hours Worktime on Wedding Day."
+        },
+        {
+            "Nama": "Full Wedding (Akad & Resepsi)", 
+            "Harga": 10500000, 
+            "Tamu": "Maximal 800 pax", 
+            "Detail": "Worked closely for two months prior. 1 Professional Project Leader, 8 Project Crew, Online Progress Meeting (5x), Offline Assist (3x), Technical Meeting (1x), Snack & Transport (Jabodetabek), Guidance Book, 8 Hours Worktime on Wedding Day."
+        }
     ],
     "Wedding Planner Only": [
-        {"Nama": "Full Wedding Planner Service", "Harga": 36499000, "Tamu": "Maks. 1000 pax", "Detail": "Pendampingan 6-7 bulan, 3x Online Meeting, Survey Venue 3x, Fitting Baju 2x, Test Food 2x, Pengurusan KUA, 1 Manager + 8 Crew (10 Jam Kerja), Bonus 1 Malam di Four Season/Langham + 100 Pax Teazzi."}
+        {
+            "Nama": "Full Wedding Planner Service", 
+            "Harga": 36499000, 
+            "Tamu": "Maximal 1000 pax", 
+            "Detail": """
+            Worked closely for 6-7 months prior.
+            • **Preparation:** Progress Meeting by Online (3x), Assisting survey venue (3x), Assisting fitting attire (2x), Assisting concepting decor offline (1x), Assisting test food (2x), Provide max 3 options for each vendor, Technical Meeting (1x), Guidance Book, Drafting Rundown, Project Timeline, Budget plan (RAB), Vendor management, Handling KUA administration, Unlimited consultation via WA, Snack TM.
+            • **On The Day:** 1 Professional Wedding Manager, 8 Wedding Manpower, 10 Hours Service, Wedding Report, Marriage Document Handling (KUA Jabodetabek City Only).
+            • **EXTRA BONUS:** 1 Night Stay at Four Season/Langham, 100 pax hype stall Teazzi.
+            """
+        }
     ]
 }
 
 VENUE_PACKAGES = [
     {"Kota": "Jakarta", "Nama": "Pejaten Terrace", "100pax": 87799000, "200pax": 99499000, "300pax": 110499000, "Kapasitas": 300},
-    {"Kota": "Jakarta", "Nama": "Griyo Kulo (Hotel/Resto)", "100pax": 71799000, "200pax": 80799000, "300pax": 89799000, "Kapasitas": 500},
-    {"Kota": "Jakarta", "Nama": "Aroem Mahakam (Hotel/Resto)", "100pax": 93549000, "200pax": 118149000, "300pax": 142749000, "Kapasitas": 300},
+    {"Kota": "Jakarta", "Nama": "Griyo Kulo *", "100pax": 71799000, "200pax": 80799000, "300pax": 89799000, "Kapasitas": 500},
+    {"Kota": "Jakarta", "Nama": "Aroem Mahakam *", "100pax": 93549000, "200pax": 118149000, "300pax": 142749000, "Kapasitas": 300},
     {"Kota": "Jakarta", "Nama": "Aleesha", "100pax": 88500000, "200pax": 98500000, "300pax": 108500000, "Kapasitas": 400},
     {"Kota": "Jakarta", "Nama": "Casakhasa", "100pax": 153799000, "200pax": 163799000, "300pax": 173799000, "Kapasitas": 400},
     {"Kota": "Depok", "Nama": "Tanavila", "100pax": 118799000, "200pax": 128799000, "300pax": 138799000, "Kapasitas": 500},
     {"Kota": "Depok", "Nama": "Rumah Keramik", "100pax": 122799000, "200pax": 132799000, "300pax": 142799000, "Kapasitas": 500},
     {"Kota": "Tangerang & Tangsel", "Nama": "Indy Bintaro (Indoor)", "100pax": 125439000, "200pax": 135439000, "300pax": 145439000, "Kapasitas": 300},
-    {"Kota": "Tangerang & Tangsel", "Nama": "Aviary Bintaro (Hotel/Resto)", "100pax": 154799000, "200pax": 154799000, "300pax": 191799000, "Kapasitas": 500}
+    {"Kota": "Tangerang & Tangsel", "Nama": "Aviary Bintaro *", "100pax": 154799000, "200pax": 154799000, "300pax": 191799000, "Kapasitas": 500}
 ]
 
 # 3. INITIALIZE DATABASE CLIENT DI MEMORI APP
@@ -79,17 +133,30 @@ if menu == "💰 Lihat Price List Resmi 2026":
     
     with tab1:
         for kategori, item_list in PRICELIST_PACKAGES.items():
-            st.markdown(f"#### 🔹 {kategori}")
+            st.markdown(f"### 🔹 {kategori}")
             for item in item_list:
-                with st.expander(f"{item['Nama']} — Rp{item['Harga']:,}"):
+                with st.expander(f"{item['Nama']} — {format_rupiah(item['Harga'])}"):
                     st.write(f"**Kapasitas:** {item['Tamu']}")
-                    st.write(f"**Benefit Utama:** {item['Detail']}")
+                    st.markdown("**Detail Paket Resmi:**")
+                    st.markdown(item['Detail'])
                     
     with tab2:
-        st.markdown("#### 🏨 Daftar Venue & Harga Paket All-In (100 - 300 PAX)")
-        df_venue = pd.DataFrame(VENUE_PACKAGES)
-        df_venue.columns = ["Wilayah", "Nama Venue / Hotel", "Paket 100 Pax", "Paket 200 Pax", "Paket 300 Pax", "Max Kapasitas"]
-        st.dataframe(df_venue, use_container_width=True)
+        st.markdown("### 🏨 Daftar Venue & Harga Paket All-In (100 - 300 PAX)")
+        st.caption("*Catatan: Tanda bintang (*) menunjukkan venue hotel/resto dengan catering in-house.")
+        
+        # Format angka di tabel agar ada Rp dan titik bintik tanda baca harganya
+        formatted_venues = []
+        for v in VENUE_PACKAGES:
+            formatted_venues.append({
+                "Wilayah": v["Kota"],
+                "Nama Venue / Hotel": v["Nama"],
+                "Paket 100 Pax": format_rupiah(v["100pax"]),
+                "Paket 200 Pax": format_rupiah(v["200pax"]),
+                "Paket 300 Pax": format_rupiah(v["300pax"]),
+                "Max Kapasitas": f"{v['Kapasitas']} pax"
+            })
+        df_venue = pd.DataFrame(formatted_venues)
+        st.dataframe(df_venue, use_container_width=True, hide_index=True)
 
 # ==================== MENU: INPUT KLIEN BARU ====================
 elif menu == "➕ Input Klien Baru (Tanpa Excel)":
@@ -124,7 +191,7 @@ elif menu == "➕ Input Klien Baru (Tanpa Excel)":
                 "Nama Klien": nama_klien, "Pengantin Wanita": p_wanita, "Pengantin Pria": p_pria,
                 "WhatsApp": wa_aktif, "Tanggal Pernikahan": str(tgl_nikah), "Kota": kota,
                 "Estimasi Tamu": tamu, "Status Venue": venue_status, "Nama Venue": nama_venue,
-                "Konsep": konsep, "Budget": budget, "Layanan WO": layanan, "Kendala": kendala
+                "Konsep":概念, "Budget": budget, "Layanan WO": layanan, "Kendala": kendala
             }
             st.session_state.client_db.append(new_data)
             st.success(f"🎉 Sukses menyimpan data {nama_klien}!")
@@ -155,36 +222,37 @@ else:
         
     st.markdown("---")
     
-    # 🤖 FITUR BARU: AUTOMATED RECOMMENDER SYSTEM (Pencocokan Otomatis Berdasarkan Brosur)
+    # SYSTEM REKOMENDASI OTOMATIS DENGAN FORMAT RP & TITIK BACA
     st.markdown("### 🤖 Rekomendasi Paket Otomatis dari 1 Destiny untuk Klien Ini:")
     
-    tamu_clean = client_data['Estimasi Tamu'] # Contoh: "300 pax"
+    tamu_clean = client_data['Estimasi Tamu'] 
     kota_klien = client_data['Kota']
     
     col_rec1, col_rec2 = st.columns(2)
     
     with col_rec1:
         st.markdown("#### 🏢 Pilihan Paket All-In (Include Venue & Catering)")
-        # Filter venue yang cocok dengan kota dan jumlah tamu inputan klien
         match_found = False
         for v in VENUE_PACKAGES:
             if v["Kota"] == kota_klien:
                 match_found = True
-                harga_paket = v.get(tamu_clean.replace(" ", ""), "Hubungi Admin")
-                if isinstance(harga_paket, int):
+                key_pax = tamu_clean.replace(" ", "") # menghasilkan "100pax", "200pax", atau "300pax"
+                harga_paket = v.get(key_pax, None)
+                
+                if harga_paket:
                     st.markdown(f"⭐ **{v['Nama']} ({v['Kota']})**")
-                    st.markdown(f"<div class='price-tag'>Harga Paket All-In untuk {tamu_clean}: Rp{harga_paket:,}</div>", unsafe_allow_html=True)
-        if not match_found:
-            st.write("_Silakan pilih wilayah Jakarta/Depok/Tangerang saat input data untuk melihat kecocokan harga venue All-In._")
+                    st.markdown(f"<div class='price-tag'>Harga Paket All-In: {format_rupiah(harga_paket)}</div>", unsafe_allow_html=True)
+        if not match_found or "400" in tamu_clean or "500" in tamu_clean:
+            st.write("_Paket venue All-In saat ini tersedia untuk opsi wilayah Jakarta/Depok/Tangerang skala 100-300 pax._")
             
     with col_rec2:
         st.markdown("#### 📦 Pilihan Paket Lepas (Exclude Venue & Catering)")
         if "100" in tamu_clean or "200" in tamu_clean or "300" in tamu_clean:
-            st.markdown("**👉 Intimate Package (Maks 300 Pax)**")
-            st.markdown("<div class='price-tag'>Harga Paket: Rp51,699,000</div>", unsafe_allow_html=True)
+            st.markdown("**👉 Intimate Package (Up to 300 guests)**")
+            st.markdown(f"<div class='price-tag'>Harga Paket: {format_rupiah(51699000)}</div>", unsafe_allow_html=True)
         else:
-            st.markdown("**👉 Full Wedding Package (Maks 600 Pax)**")
-            st.markdown("<div class='price-tag'>Harga Paket: Rp75,999,000</div>", unsafe_allow_html=True)
+            st.markdown("**👉 Full Wedding Package (Up to 600 guests)**")
+            st.markdown(f"<div class='price-tag'>Harga Paket: {format_rupiah(75999000)}</div>", unsafe_allow_html=True)
             
     st.markdown("---")
     st.subheader("💬 Auto-Brief Teks Siap Kirim ke WhatsApp Tim WO")
