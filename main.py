@@ -173,7 +173,7 @@ if menu == "🍲 Catering Menu Selection":
 # ==================== MENU: OUR VENDOR LIST & PORTFOLIO (SQUARE GALERI DENGAN AGNOSTIC CHECKER) ====================
 elif menu == "🤝 Our Vendor List & Portfolio":
     st.subheader("🤝 1 Destiny Official Vendor List & Portfolio (2026)")
-    tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto Portfolio Terbaik"])
+    tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto"])
     
     with tab_list:
         st.info("Klik tombol 'Buka Instagram' atau link Google Drive di sebelah kanan untuk melihat kelengkapan dokumen.")
