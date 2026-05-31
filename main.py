@@ -75,7 +75,7 @@ VENUE_PACKAGES = [
     {"Kota": "Jakarta", "Nama": "Taman Kajoe", "Prices": {"400pax": 209799000, "500pax": 222799000}, "Kapasitas": 1000, "Tipe": "Medium"}
 ]
 
-# 3. DATABASE VENDOR REKANAN DENGAN KOLOM DOKUMEN & PORTFOLIO GOOGLE DRIVE (SESUAI SCREENSHOT)
+# 3. DATABASE VENDOR REKANAN (Teks \n sudah dibersihkan total dan diganti tag HTML murni)
 VENDOR_LIST = [
     {
         "Kategori": "Wedding planner/organizer", 
@@ -105,11 +105,7 @@ VENDOR_LIST = [
         "Kategori": "MUA & Attire", 
         "Nama Vendor": "Micca Brides", 
         "Instagram": "https://www.instagram.com/miccabrides/",
-        "Dokumen / GDrive": """
-            <a href="https://drive.google.com/drive/folders/1N-GSGPwlCyhcUdlvSF1o1uPPgzcgkK_L/" target="_blank">📑 Catalog Micca</a><br>
-            <a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i/" target="_blank">💄 MUA Bride</a><br>
-            <a href="https://drive.google.com/drive/folders/1aLYchVrKgc54et_pEJF9j0XpBsuDc9Ly" target="_blank">👩 MUA Mom</a>
-        """
+        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1N-GSGPwlCyhcUdlvSF1o1uPPgzcgkK_L/" target="_blank">📄 Catalog Micca</a><br><a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i/" target="_blank">💄 MUA Bride</a><br><a href="https://drive.google.com/drive/folders/1aLYchVrKgc54et_pEJF9j0XpBsuDc9Ly" target="_blank">👩 MUA Mom</a>'
     },
     {"Kategori": "MC", "Nama Vendor": "Mawadah", "Instagram": "https://www.instagram.com/mawadah_mc?igsh=Y2pkdXF0d2NlemQy/", "Dokumen / GDrive": "-"},
     {"Kategori": "MC", "Nama Vendor": "Mulyadi", "Instagram": "https://www.instagram.com/mulyadi_mc?igsh=NWY1ZWhpOWlkNGpk/", "Dokumen / GDrive": "-"},
@@ -140,16 +136,15 @@ menu = st.sidebar.radio("Navigasi Konten:", [
     "🤝 Our Vendor List & Portfolio"
 ])
 
-# ==================== MENU: OUR VENDOR LIST & PORTFOLIO (SUDAH DIBENAHI) ====================
+# ==================== MENU: OUR VENDOR LIST & PORTFOLIO ====================
 if menu == "🤝 Our Vendor List & Portfolio":
     st.subheader("🤝 1 Destiny Official Vendor List & Portfolio (2026)")
     
-    tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto"])
+    tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto Portfolio Terbaik"])
     
     with tab_list:
         st.info("Klik tombol 'Buka Instagram' atau link Google Drive di sebelah kanan untuk melihat kelengkapan dokumen.")
         
-        # Mapping struktur kolom sesuai instruksi spreadsheet baru
         formatted_vendors = []
         for vendor in VENDOR_LIST:
             formatted_vendors.append({
@@ -160,7 +155,6 @@ if menu == "🤝 Our Vendor List & Portfolio":
             })
             
         df_vendor = pd.DataFrame(formatted_vendors)
-        # Tampilkan tabel HTML interaktif agar link GDrive & IG bisa diklik langsung
         st.write(df_vendor.to_html(escape=False, index=False), unsafe_allow_html=True)
         
     with tab_galeri:
