@@ -69,13 +69,24 @@ VENUE_PACKAGES = [
     {"Kota": "Jakarta", "Nama": "Aroem Mahakam *", "Prices": {"100pax": 93549000, "200pax": 118149000, "300pax": 142749000}, "Kapasitas": 300, "Tipe": "Small"},
     {"Kota": "Jakarta", "Nama": "Aleesha", "Prices": {"100pax": 88500000, "200pax": 98500000, "300pax": 108500000}, "Kapasitas": 400, "Tipe": "Small"},
     {"Kota": "Jakarta", "Nama": "Casakhasa", "Prices": {"100pax": 153799000, "200pax": 163799000, "300pax": 173799000}, "Kapasitas": 400, "Tipe": "Small"},
-    {"Kota": "Jakarta", "Nama": "D'Hall Kementerian Pertanian", "Prices": {"400pax": 163799000, "500pax": 173799000}, "Kapasitas": 700, "Tipe": "Medium"},
-    {"Kota": "Jakarta", "Nama": "Soho Pancoran Ballroom", "Prices": {"400pax": 173799000, "500pax": 183799000}, "Kapasitas": 700, "Tipe": "Medium"},
-    {"Kota": "Jakarta", "Nama": "Felfest UI", "Prices": {"400pax": 190799000, "500pax": 200799000}, "Kapasitas": 800, "Tipe": "Medium"},
-    {"Kota": "Jakarta", "Nama": "Taman Kajoe", "Prices": {"400pax": 209799000, "500pax": 222799000}, "Kapasitas": 1000, "Tipe": "Medium"}
+    {"Kota": "Jakarta", "Nama": "Aroem Jakarta *", "Prices": {"100pax": 93549000, "200pax": 118149000, "300pax": 142749000}, "Kapasitas": 500, "Tipe": "Small"},
+    {"Kota": "Jakarta", "Nama": "Pelindo (Indoor)", "Prices": {"100pax": 118799000, "200pax": 128799000, "300pax": 138799000}, "Kapasitas": 300, "Tipe": "Small"},
+    {"Kota": "Jakarta", "Nama": "Heritage Garden", "Prices": {"100pax": 133799000, "200pax": 143799000, "300pax": 153799000}, "Kapasitas": 500, "Tipe": "Small"},
+    {"Kota": "Depok", "Nama": "Tanavila", "Prices": {"100pax": 118799000, "200pax": 128799000, "300pax": 138799000}, "Kapasitas": 500, "Tipe": "Small"},
+    {"Kota": "Depok", "Nama": "Rumah Keramik", "Prices": {"100pax": 122799000, "200pax": 132799000, "300pax": 142799000}, "Kapasitas": 500, "Tipe": "Small"},
+    {"Kota": "Tangerang & Tangsel", "Nama": "Indy Bintaro (Indoor)", "Prices": {"100pax": 125439000, "200pax": 135439000, "300pax": 145439000}, "Kapasitas": 300, "Tipe": "Small"},
+    {"Kota": "Tangerang & Tangsel", "Nama": "Aviary Bintaro *", "Prices": {"100pax": 154799000, "200pax": 154799000, "300pax": 191799000}, "Kapasitas": 500, "Tipe": "Small"},
+    {"Kota": "Jakarta", "Nama": "D'Hall Kementerian Pertanian", "Prices": {"400pax": 163799000, "500pax": 173799000, "600pax": 183799000, "700pax": 193799000}, "Kapasitas": 700, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "Soho Pancoran Ballroom", "Prices": {"400pax": 173799000, "500pax": 183799000, "600pax": 193799000, "700pax": 203799000}, "Kapasitas": 700, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "Aminta Hall", "Prices": {"400pax": 174200000, "500pax": 185200000, "600pax": 196200000, "700pax": 206200000}, "Kapasitas": 700, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "Felfest UI", "Prices": {"400pax": 190799000, "500pax": 200799000, "600pax": 210799000, "700pax": 220799000}, "Kapasitas": 800, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "Taman Kajoe", "Prices": {"400pax": 209799000, "500pax": 222799000, "600pax": 235799000, "700pax": 248799000}, "Kapasitas": 1000, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "SQ Dome", "Prices": {"400pax": 189300000, "500pax": 202300000, "600pax": 215300000, "700pax": 228300000}, "Kapasitas": 800, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "BRIN Lebak Bulus", "Prices": {"400pax": 173799000, "500pax": 183799000, "600pax": 193799000, "700pax": 203799000}, "Kapasitas": 800, "Tipe": "Medium"},
+    {"Kota": "Jakarta", "Nama": "Calathea Lutea", "Prices": {"400pax": 192799000, "500pax": 202799000, "600pax": 212799000, "700pax": 222799000}, "Kapasitas": 800, "Tipe": "Medium"}
 ]
 
-# 3. DATABASE VENDOR REKANAN (Teks \n sudah dibersihkan total dan diganti tag HTML murni)
+# 3. DATABASE VENDOR REKANAN (LINK DIVE SUDAH DIPERBAIKI TOTAL AGAR TIDAK TERTUKAR)
 VENDOR_LIST = [
     {
         "Kategori": "Wedding planner/organizer", 
@@ -87,13 +98,13 @@ VENDOR_LIST = [
         "Kategori": "Documentation", 
         "Nama Vendor": "Aestec", 
         "Instagram": "https://www.instagram.com/aestec.wedding/",
-        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i" target="_blank">📁 Buka Portfolio</a>'
+        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9LycXmSPnt" target="_blank">📁 Buka Portfolio</a>'
     },
     {
         "Kategori": "Documentation", 
         "Nama Vendor": "Camonphoto", 
         "Instagram": "https://www.instagram.com/camonphoto/",
-        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9LycXmSPnt" target="_blank">📁 Buka Portfolio</a>'
+        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i" target="_blank">📁 Buka Portfolio</a>'
     },
     {
         "Kategori": "Decoration", 
@@ -105,7 +116,7 @@ VENDOR_LIST = [
         "Kategori": "MUA & Attire", 
         "Nama Vendor": "Micca Brides", 
         "Instagram": "https://www.instagram.com/miccabrides/",
-        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1N-GSGPwlCyhcUdlvSF1o1uPPgzcgkK_L/" target="_blank">📄 Catalog Micca</a><br><a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i/" target="_blank">💄 MUA Bride</a><br><a href="https://drive.google.com/drive/folders/1aLYchVrKgc54et_pEJF9j0XpBsuDc9Ly" target="_blank">👩 MUA Mom</a>'
+        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1N-GSGPwICyhcUdlvSF1o1uPPgzcgkK_L/" target="_blank">📄 Catalog Micca</a><br><a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i/" target="_blank">💄 MUA Bride</a><br><a href="https://drive.google.com/drive/folders/1aLYchVrKgc54et_pEJF9j0XpBsuDc9Ly" target="_blank">👩 MUA Mom</a>'
     },
     {"Kategori": "MC", "Nama Vendor": "Mawadah", "Instagram": "https://www.instagram.com/mawadah_mc?igsh=Y2pkdXF0d2NlemQy/", "Dokumen / GDrive": "-"},
     {"Kategori": "MC", "Nama Vendor": "Mulyadi", "Instagram": "https://www.instagram.com/mulyadi_mc?igsh=NWY1ZWhpOWlkNGpk/", "Dokumen / GDrive": "-"},
@@ -121,7 +132,7 @@ if 'client_db' not in st.session_state:
         {
             "Nama Klien": "Skrining - Siti & Budi", "Pengantin Wanita": "Siti Aliyah", "Pengantin Pria": "Budi Santoso",
             "WhatsApp": "6281234567890", "Email": "siti.budi@email.com", "Instagram": "@siti_aliyah",
-            "Tanggal Pernikahan": "2026-12-12", "Kota": "Jakarta", "Jenis Acara": "Akad Nikah - Resepsi",
+            "Tanggal Pernikahan": "2026-12-12", "Kota :": "Jakarta", "Jenis Acara": "Akad Nikah - Resepsi",
             "Estimasi Tamu": "300", "Venue Status": "Sudah Survey Beberapa Venue", "Nama Venue": "Pejaten Terrace",
             "Preference Venue": "Semi Outdoor", "Notes": "Mencari dekorasi dengan tema floral natural."
         }
@@ -139,12 +150,10 @@ menu = st.sidebar.radio("Navigasi Konten:", [
 # ==================== MENU: OUR VENDOR LIST & PORTFOLIO ====================
 if menu == "🤝 Our Vendor List & Portfolio":
     st.subheader("🤝 1 Destiny Official Vendor List & Portfolio (2026)")
-    
-    tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto"])
+    tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto Portfolio Terbaik"])
     
     with tab_list:
         st.info("Klik tombol 'Buka Instagram' atau link Google Drive di sebelah kanan untuk melihat kelengkapan dokumen.")
-        
         formatted_vendors = []
         for vendor in VENDOR_LIST:
             formatted_vendors.append({
@@ -153,15 +162,11 @@ if menu == "🤝 Our Vendor List & Portfolio":
                 "Link Instagram": f'<a href="{vendor["Instagram"]}" target="_blank">🔗 Buka Instagram</a>',
                 "Portfolio & Dokumen Resmi (Google Drive)": vendor["Dokumen / GDrive"]
             })
-            
-        df_vendor = pd.DataFrame(formatted_vendors)
-        st.write(df_vendor.to_html(escape=False, index=False), unsafe_allow_html=True)
+        st.write(pd.DataFrame(formatted_vendors).to_html(escape=False, index=False), unsafe_allow_html=True)
         
     with tab_galeri:
         st.markdown("### 🌟 Dokumentasi Real-Event Portfolio")
         st.write("")
-        
-        # Grid Foto Square
         c1, c2, c3, c4 = st.columns(4)
         with c1: st.image("Dokumentasi1.jpg", use_container_width=True)
         with c2: st.image("Dokumentasi2.jpg", use_container_width=True)
@@ -194,16 +199,21 @@ elif menu == "💰 Lihat Price List Resmi 2026":
             for item in item_list:
                 with st.expander(f"{item['Nama']} — {format_rupiah(item['Harga'])}"):
                     st.write(f"**Kapasitas:** {item['Tamu']}")
-                    for sub_detail in item['Detail']:
-                        st.markdown(sub_detail)
+                    for sub_detail in item['Detail']: st.markdown(sub_detail)
     with t2:
+        st.markdown("### 🏢 Matriks Paket Include Venue & Catering (Catering Blessing)")
         rows = []
         for v in VENUE_PACKAGES:
             rows.append({
                 "Wilayah": v["Kota"], "Nama Venue": v["Nama"],
-                "100 Pax": format_rupiah(v["Prices"].get("100pax", "-")), "200 Pax": format_rupiah(v["Prices"].get("200pax", "-")),
-                "300 Pax": format_rupiah(v["Prices"].get("300pax", "-")), "400 Pax": format_rupiah(v["Prices"].get("400pax", "-")),
-                "500 Pax": format_rupiah(v["Prices"].get("500pax", "-")), "Max Kapasitas": f"{v['Kapasitas']} pax"
+                "100 Pax": format_rupiah(v["Prices"].get("100pax", "-")), 
+                "200 Pax": format_rupiah(v["Prices"].get("200pax", "-")),
+                "300 Pax": format_rupiah(v["Prices"].get("300pax", "-")), 
+                "400 Pax": format_rupiah(v["Prices"].get("400pax", "-")),
+                "500 Pax": format_rupiah(v["Prices"].get("500pax", "-")), 
+                "600 Pax": format_rupiah(v["Prices"].get("600pax", "-")), 
+                "700 Pax": format_rupiah(v["Prices"].get("700pax", "-")), 
+                "Max Kapasitas": f"{v['Kapasitas']} pax"
             })
         st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
@@ -225,7 +235,7 @@ elif menu == "➕ Input Klien Baru (Form Skrining Baru)":
             jenis_acara = st.selectbox("Jenis acara yang direncanakan", ["Akad Nikah - Resepsi", "Pemberkatan - Resepsi", "Akad Ramah tamah Only", "Pemberkatan Ramah Tamah", "Resepsi Only"])
         with col2:
             st.markdown("#### 🏰 Detail Acara & Venue")
-            tamu = st.selectbox("Estimasi jumlah tamu undangan", ["100", "200", "300", "400", "500"])
+            tamu = st.selectbox("Estimasi jumlah tamu undangan", ["100", "200", "300", "400", "500", "600", "700"])
             venue_status = st.selectbox("Venue pernikahan", ["Sudah Booking Venue", "Sudah Survey Beberapa Venue", "Belum Mencari Venue"])
             nama_venue = st.text_input("Jika sudah memiliki venue, sebutkan nama venue")
             pref_venue = st.selectbox("Jika memiliki venue, preference seperti apa?", ["Indoor", "Semi Outdoor", "Full Outdoor"])
@@ -278,7 +288,7 @@ else:
     
     # SYSTEM MATCHING PAKET REKOMENDASI OTOMATIS
     st.markdown("---")
-    st.markdown("### 🤖 Hasil Analisis & Rekomendasi Paket 1 Destiny:")
+    st.markdown("### 🤖 Hasil Analisis & Rekomendasi Paket 1 Destiny untuk Klien Ini:")
     
     tamu_clean = f"{client_data['Estimasi Tamu']}pax"
     kota_klien = client_data['Kota']
@@ -296,15 +306,20 @@ else:
                 with st.expander("👁️ Detail Isi Paket Include"):
                     st.markdown(DETAIL_ALLIN_MEDIUM if v["Tipe"] == "Medium" else DETAIL_ALLIN_SMALL)
         if not match_found:
-            st.write("_Tidak ada venue Include Venue & Catering resmi di brosur yang masuk kriteria area & kapasitas ini._")
+            st.write("_Tidak ada kriteria harga Include Venue & Catering resmi di brosur yang cocok dengan area & kapasitas ini._")
             
     with col_rec2:
         st.markdown("#### 📦 Pilihan Paket Exclude Venue & Catering")
-        st.markdown("**👉 Intimate Package (Up to 300 guests)**")
-        st.markdown(f"<div class='price-tag'>Harga Paket: {format_rupiah(51699000)}</div>", unsafe_allow_html=True)
-        with st.expander("👁️ Detail Isi Paket Exclude"):
-            for sub in PRICELIST_PACKAGES["Exclude Venue & Catering"][0]["Detail"]:
-                st.markdown(sub)
+        if any(x in tamu_clean for x in ["100pax", "200pax", "300pax"]):
+            st.markdown("**👉 Intimate Package (Up to 300 guests)**")
+            st.markdown(f"<div class='price-tag'>Harga Paket: {format_rupiah(51699000)}</div>", unsafe_allow_html=True)
+            with st.expander("👁️ Detail Isi Paket Exclude"):
+                for sub in PRICELIST_PACKAGES["Exclude Venue & Catering"][0]["Detail"]: st.markdown(sub)
+        else:
+            st.markdown("**👉 Full Wedding Package (Up to 600 guests)**")
+            st.markdown(f"<div class='price-tag'>Harga Paket: {format_rupiah(75999000)}</div>", unsafe_allow_html=True)
+            with st.expander("👁️ Detail Isi Paket Exclude"):
+                for sub in PRICELIST_PACKAGES["Exclude Venue & Catering"][1]["Detail"]: st.markdown(sub)
 
     # BRIEF COPIER WA
     st.markdown("---")
