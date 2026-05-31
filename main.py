@@ -135,4 +135,173 @@ menu = st.sidebar.radio("Navigasi Konten:", [
 
 # ==================== MENU: LIHAT PRICELIST RESMI ====================
 if menu == "💰 Lihat Price List Resmi 2026":
-    st
+    st.subheader("📑 Katalog & Price List Resmi 1 Destiny (2026)")
+    
+    tab1, tab2 = st.tabs(["📦 Paket Lepas Venue (Exclude)", "🏢 Paket All-In (Include Venue & Catering)"])
+    
+    with tab1:
+        for kategori, item_list in PRICELIST_PACKAGES.items():
+            st.markdown(f"### 🔹 {kategori}")
+            for item in item_list:
+                with st.expander(f"{item['Nama']} — {format_rupiah(item['Harga'])}"):
+                    st.write(f"**Kapasitas:** {item['Tamu']}")
+                    st.markdown("**Detail Paket Resmi:**")
+                    for sub_detail in item['Detail']:
+                        st.markdown(sub_detail)
+                        st.write("")
+                    
+    with tab2:
+        st.markdown("### 🏢 Matriks Paket All-In (Venue + Catering Blessing)")
+        
+        # Grid Tabel Rapi untuk All-In
+        rows = []
+        for v in VENUE_PACKAGES:
+            rows.append({
+                "Wilayah": v["Kota"],
+                "Nama Venue": v["Nama"],
+                "100 Pax": format_rupiah(v["Prices"].get("100pax", "-")),
+                "200 Pax": format_rupiah(v["Prices"].get("200pax", "-")),
+                "300 Pax": format_rupiah(v["Prices"].get("300pax", "-")),
+                "400 Pax": format_rupiah(v["Prices"].get("400pax", "-")),
+                "500 Pax": format_rupiah(v["Prices"].get("500pax", "-")),
+                "600 Pax": format_rupiah(v["Prices"].get("600pax", "-")),
+                "700 Pax": format_rupiah(v["Prices"].get("700pax", "-")),
+                "Max Kapasitas": f"{v['Kapasitas']} pax"
+            })
+        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+
+# ==================== MENU: INPUT KLIEN BARU ====================
+elif menu == "➕ Input Klien Baru (Tanpa Excel)":
+    st.subheader("📝 Form Masuk Klien Baru")
+    with st.form("screening_form", clear_on_submit=True):
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("#### 👤 Biodata")
+            nama_klien = st.text_input("Nama Label Klien *", placeholder="Contoh: Klien Pancoran - Rania")
+            p_wanita = st.text_input("Nama Pengantin Wanita")
+            p_pria = st.text_input("Nama Pengantin Pria")
+            wa_aktif = st.text_input("Nomor WhatsApp (Gunakan format 62...)")
+            
+            st.markdown("#### 📅 Logistik Acara")
+            tgl_nikah = st.date_input("Rencana tanggal pernikahan", min_value=datetime.today())
+            kota = st.selectbox("Wilayah / Kota Acara", ["Jakarta", "Depok", "Tangerang & Tangsel"])
+            tamu = st.selectbox("Estimasi Jumlah Undangan", ["100 pax", "200 pax", "300 pax", "400 pax", "500 pax", "600 pax", "700 pax"])
+        with col2:
+            st.markdown("#### 🏰 Preferensi Venue & Desain")
+            venue_status = st.selectbox("Status Lokasi/Venue", ["Belum Mencari Venue", "Sudah Survey Beberapa Venue", "Sudah Booking Venue"])
+            nama_venue = st.text_input("Nama Venue (Jika sudah ada)")
+            konsep = st.multiselect("Konsep Acara", ["Modern", "Elegant", "Garden", "Intimate", "Traditional/Adat"])
+            
+            st.markdown("#### 💰 Komitmen Finansial")
+            budget = st.selectbox("Kisaran Budget Anggaran", ["<100 Juta", "100-200 Juta", "200-300 Juta", "300-500 Juta", ">500 Juta"])
+            layanan = st.multiselect("Layanan yang Dicari Klien", ["Full Wedding Planning", "Wedding Day Service", "Vendor Recommendation", "Venue Recommendation"])
+            kendala = st.text_area("Kendala Terbesar Klien")
+            
+        submit_btn = st.form_submit_button("🚀 Simpan Data Klien")
+        if submit_btn and nama_klien:
+            new_data = {
+                "Nama Klien": nama_klien, "Pengantin Wanita": p_wanita, "Pengantin Pria": p_pria,
+                "WhatsApp": wa_aktif, "Tanggal Pernikahan": str(tgl_nikah), "Kota": kota,
+                "Estimasi Tamu": tamu, "Status Venue": venue_status, "Nama Venue": nama_venue,
+                "Konsep": konsep, "Budget": budget, "Layanan WO": layanan, "Kendala": kendala
+            }
+            st.session_state.client_db.append(new_data)
+            st.success(f"🎉 Sukses menyimpan data {nama_klien}!")
+
+# ==================== MENU: LIHAT SUMMARY KEBUTUHAN KLIEN ====================
+else:
+    client_list = [c["Nama Klien"] for c in st.session_state.client_db]
+    selected_client_name = st.sidebar.selectbox("Pilih Klien untuk Ditampilkan:", client_list)
+    client_data = next(c for c in st.session_state.client_db if c["Nama Klien"] == selected_client_name)
+    
+    st.subheader(f"📋 Client Needs Summary: {client_data['Nama Klien']}")
+    
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.info("👤 **Profil Pasangan**")
+        st.write(f"• **Wanita:** {client_data['Pengantin Wanita']}")
+        st.write(f"• **Pria:** {client_data['Pengantin Pria']}")
+        st.write(f"• **WhatsApp:** {client_data['WhatsApp']}")
+    with c2:
+        st.success("📅 **Rencana Logistik**")
+        st.write(f"• **Tanggal:** {client_data['Tanggal Pernikahan']}")
+        st.write(f"• **Kota:** {client_data['Kota']}")
+        st.write(f"• **Tamu:** {client_data['Estimasi Tamu']}")
+    with c3:
+        st.warning("💰 **Ekspektasi Budget**")
+        st.write(f"• **Budget Klien:** {client_data['Budget']}")
+        st.write(f"• **Layanan Dicari:** {', '.join(client_data['Layanan WO'])}")
+        
+    st.markdown("---")
+    
+    # 🤖 CORE ENGINE PERBAIKAN: AUTO RECOMENDER & DETAIL EMIT
+    st.markdown("### 🤖 Rekomendasi Paket Otomatis Berdasarkan Jumlah Tamu:")
+    
+    tamu_clean = client_data['Estimasi Tamu']  # Contoh: "500 pax"
+    key_pax = tamu_clean.replace(" ", "")      # Mengubah menjadi "500pax"
+    kota_klien = client_data['Kota']
+    
+    col_rec1, col_rec2 = st.columns(2)
+    
+    with col_rec1:
+        st.markdown("#### 🏢 Rekomendasi Paket All-In (Include Venue & Catering)")
+        match_found = False
+        
+        for v in VENUE_PACKAGES:
+            if v["Kota"] == kota_klien and key_pax in v["Prices"]:
+                match_found = True
+                harga_paket = v["Prices"][key_pax]
+                
+                st.markdown(f"⭐ **{v['Nama']} ({v['Kota']})**")
+                st.markdown(f"<div class='price-tag'>Harga All-In untuk {tamu_clean}: {format_rupiah(harga_paket)}</div>", unsafe_allow_html=True)
+                
+                # Tampilkan detail isi paket secara dinamis sesuai skalanya
+                with st.expander(f"👁️ Lihat Detail Spesifikasi Paket {v['Nama']}"):
+                    if v["Tipe"] == "Medium":
+                        st.markdown("**💎 Detail Keuntungan Paket Medium Scale (400-700 Pax):**")
+                        st.markdown(DETAIL_ALLIN_MEDIUM)
+                    else:
+                        st.markdown("**✨ Detail Keuntungan Paket Intimate Scale (100-300 Pax):**")
+                        st.markdown(DETAIL_ALLIN_SMALL)
+                        
+        if not match_found:
+            st.write(f"_Tidak ada data venue All-In resmi di file brosur yang cocok untuk wilayah {kota_klien} dengan kapasitas {tamu_clean}._")
+            
+    with col_rec2:
+        st.markdown("#### 📦 Rekomendasi Paket Lepas (Exclude Venue & Catering)")
+        # Deteksi otomatis skala paket lepas
+        is_intimate = any(x in tamu_clean for x in ["100", "200", "300"])
+        
+        if is_intimate:
+            st.markdown("**👉 Intimate Package (Up to 300 guests)**")
+            st.markdown(f"<div class='price-tag'>Harga Paket: {format_rupiah(51699000)}</div>", unsafe_allow_html=True)
+            with st.expander("👁️ Lihat Detail Spesifikasi Intimate Package"):
+                for sub in PRICELIST_PACKAGES["Exclude Venue & Catering (Paket Lepas)"][0]["Detail"]:
+                    st.markdown(sub)
+        else:
+            st.markdown("**👉 Full Wedding Package (Up to 600 guests)**")
+            st.markdown(f"<div class='price-tag'>Harga Paket: {format_rupiah(75999000)}</div>", unsafe_allow_html=True)
+            with st.expander("👁️ Lihat Detail Spesifikasi Full Wedding Package"):
+                for sub in PRICELIST_PACKAGES["Exclude Venue & Catering (Paket Lepas)"][1]["Detail"]:
+                    st.markdown(sub)
+            
+    st.markdown("---")
+    st.subheader("💬 Auto-Brief Teks Siap Kirim ke WhatsApp Tim WO")
+    konsep_str = ", ".join(client_data['Konsep']) if client_data['Konsep'] else "Belum Menentukan"
+    layanan_str = ", ".join(client_data['Layanan WO']) if client_data['Layanan WO'] else "-"
+    
+    brief_text = f"""*BRIEF KLIEN BARU - 1 DESTINY*
+====================================
+• *Nama Pasangan*: {client_data['Pengantin Wanita']} & {client_data['Pengantin Pria']}
+• *Tanggal Acara*: {client_data['Tanggal Pernikahan']}
+• *Lokasi/Area* : {client_data['Kota']}
+• *Estimasi Tamu*: {client_data['Estimasi Tamu']}
+• *Konsep Impian*: {konsep_str}
+• *Range Budget* : {client_data['Budget']}
+• *Layanan Dicari*: {layanan_str}
+
+*⚠️ Kendala Utama Klien:*
+"{client_data['Kendala'] if client_data['Kendala'] else '-'}"
+====================================
+_Dibuat otomatis oleh Wedding CRM Dashboard_"""
+    st.code(brief_text, language="text")
