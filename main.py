@@ -18,36 +18,36 @@ st.markdown("""
 # Fungsi pembantu untuk memformat angka menjadi Rupiah (Contoh: Rp110.499.000)
 def format_rupiah(angka):
     if isinstance(angka, (int, float)):
-        return f"Rp{angka:,.0f}".replace(",", ".")
+        return f"Rp {angka:,.0f}".replace(",", ".")
     return angka
 
-# 2. DATA DATABASE INTERNAL PRICELIST 2026 (Disamakan Persis Sesuai Brosur Anda)
+# 2. DATA DATABASE INTERNAL PRICELIST 2026 (Diperbaiki agar barisnya pecah ke bawah dengan rapi)
 PRICELIST_PACKAGES = {
-    "Exclude Venue & Catering (Paket Lepas)": [
+    "Exclude Venue & Catering": [
         {
             "Nama": "Intimate Package", 
             "Harga": 51699000, 
             "Tamu": "Up to 300 guests", 
-            "Detail": """
-            • **Wedding Organizer & Planner:** Progress Meeting (3x), Offline Assist (3x), Technical Meeting (1x), Guidance Book, Rundown, Timeline, Unlimited consultation via WA, Snack TM, Handling KUA administration. Wo The Day: 1 Professional Wedding Manager + 4 Crew on the Day (6-8 Hours Worktime).
-            • **Decoration:** Backdrop up to 5m, Karpet permadani Set, Meja Kursi Akad, Standing Flower 2 pcs, Welcome Sign Kotak, Ampau 1 pcs, Bench Sofa Pengantin 1 pcs, Aisle Decoration (Wedding Gate), FREE Buku Tamu 2 pcs.
-            • **Documentation:** 1 Photographer, 1 Videographer, 1 Crew, 6 hours Photosession, Editing Photo, Video 3 s/d 5 Menit, All file On Flashdisk.
-            • **MC:** MC Akad/Pemberkatan - Resepsi (4-5 hours worktime, Free Transport).
-            • **MUA & Attire:** Makeup & Hairdo/Hijabdo Bride, Makeup Touch Up Groom, Makeup & Hairdo 2 Moms, Retouch Resepsi, Sepasang Baju Akad & Resepsi, 2 Baju Ayah & 2 Baju Ibu, FREE Fake Nail Art & Softlense Normal.
-            """
+            "Detail": [
+                "**Wedding Organizer & Planner:**\nProgress Meeting (3x), Offline Assist (3x), Technical Meeting (1x), Guidance Book, Rundown, Timeline, Unlimited consultation via WA, Snack TM, Handling KUA administration.\n*Wo The Day:* 1 Professional Wedding Manager + 4 Crew on the Day (6-8 Hours Worktime).",
+                "**Decoration:**\nBackdrop up to 5m, Karpet permadani Set, Meja Kursi Akad, Standing Flower 2 pcs, Welcome Sign Kotak, Ampau 1 pcs, Bench Sofa Pengantin 1 pcs, Aisle Decoration (Wedding Gate), FREE Buku Tamu 2 pcs.",
+                "**Documentation:**\n1 Photographer, 1 Videographer, 1 Crew, 6 hours Photosession, Editing Photo, Video 3 s/d 5 Menit, All file On Flashdisk.",
+                "**MC:**\nMC Akad/Pemberkatan - Resepsi (4-5 hours worktime, Free Transport).",
+                "**MUA & Attire:**\nMakeup & Hairdo/Hijabdo Bride, Makeup Touch Up Groom, Makeup & Hairdo 2 Moms, Retouch Resepsi, Sepasang Baju Akad & Resepsi, 2 Baju Ayah & 2 Baju Ibu, FREE Fake Nail Art & Softlense Normal."
+            ]
         },
         {
             "Nama": "Full Wedding Package", 
             "Harga": 75999000, 
             "Tamu": "Up to 600 guests", 
-            "Detail": """
-            • **Wedding Organizer & Planner:** Progress Meeting (3x), Offline Assist (3x), Technical Meeting (1x), Guidance Book, Rundown, Timeline, Unlimited consultation via WA, Snack TM, Handling KUA administration. Wo The Day: 1 Professional Wedding Manager + 5-6 Crew on the Day (8 Hours Worktime).
-            • **Decoration (Pelaminan 8m):** Sofa Pelaminan 1 set, Pelaminan 8m, Karpet permadani, Tanaman pelaminan. Area Masuk: Welcome Sign, Kotak Ampau 2 pcs, Backdrop penerima tamu 2m, Pergola pintu masuk. Area Tengah: Set Meja kursi akad, Karpet jalan, Standing flower 6 pcs, Bunga pikok jalur jalan 8 titik, Lampu bunga 2 set, Lampu crystal 2 set, Photo Gallery 3 pcs.
-            • **Documentation:** 1 Photographer, 1 Videographer, 1 Crew, 8 hours Photosession, Editing Photo, Video 3 s/d 5 Menit, All file On Flashdisk.
-            • **Entertainment:** 1 Singer & 1 Keyboardist (atau 1 Singer & 1 Guitarist), Sound system 2000 watt.
-            • **MC:** MC Akad/Pemberkatan - Resepsi (4-5 hours worktime, Free Transport).
-            • **MUA & Attire:** Makeup & Hairdo Bride + Touch Up Groom, Makeup & Hairdo 2 Moms, Retouch Resepsi, Sepasang Baju Akad & Resepsi, 2 Baju Ayah & 2 Baju Ibu, FREE Fake Nail Art & Softlense Normal.
-            """
+            "Detail": [
+                "**Wedding Organizer & Planner:**\nProgress Meeting (3x), Offline Assist (3x), Technical Meeting (1x), Guidance Book, Rundown, Timeline, Unlimited consultation via WA, Snack TM, Handling KUA administration.\n*Wo The Day:* 1 Professional Wedding Manager + 5-6 Crew on the Day (8 Hours Worktime).",
+                "**Decoration (Pelaminan 8m):**\n- *Pelaminan:* Sofa Pelaminan 1 set, Pelaminan 8m, Karpet permadani, Tanaman pelaminan.\n- *Area Masuk:* Welcome Sign, Kotak Ampau 2 pcs, Backdrop penerima tamu 2m, Pergola pintu masuk.\n- *Area Tengah:* Set Meja kursi akad, Karpet jalan, Standing flower 6 pcs, Bunga pikok jalur jalan 8 titik, Lampu bunga 2 set, Lampu crystal 2 set, Photo Gallery 3 pcs.",
+                "**Documentation:**\n1 Photographer, 1 Videographer, 1 Crew, 8 hours Photosession, Editing Photo, Video 3 s/d 5 Menit, All file On Flashdisk.",
+                "**Entertainment:**\n1 Singer & 1 Keyboardist (atau 1 Singer & 1 Guitarist), Sound system 2000 watt.",
+                "**MC:**\nMC Akad/Pemberkatan - Resepsi (4-5 hours worktime, Free Transport).",
+                "**MUA & Attire:**\nMakeup & Hairdo Bride + Touch Up Groom, Makeup & Hairdo 2 Moms, Retouch Resepsi, Sepasang Baju Akad & Resepsi, 2 Baju Ayah & 2 Baju Ibu, FREE Fake Nail Art & Softlense Normal."
+            ]
         }
     ],
     "On The Day WO Services Only": [
@@ -55,19 +55,36 @@ PRICELIST_PACKAGES = {
             "Nama": "Before Wedding Services (Lamaran, Pengajian, Sangjit, etc.)", 
             "Harga": 6500000, 
             "Tamu": "Maximal 100 pax", 
-            "Detail": "1 Professional Project Leader, 3 Project Crew, Progress Meeting (3x), Technical Meeting (1x), Transport (Jabodetabek), Guidance Book, 5 Hours Worktime on Wedding Day."
+            "Detail": [
+                "**Team Kerja:** 1 Professional Project Leader + 3 Project Crew",
+                "**Konsultasi:** Progress Meeting (3x), Technical Meeting (1x)",
+                "**Logistik:** Transport (Jabodetabek), Guidance Book Included",
+                "**Durasi Hari H:** 5 Hours Worktime on Wedding Day."
+            ]
         },
         {
             "Nama": "Intimate Wedding (Akad Intimate / Resepsi Only)", 
             "Harga": 8000000, 
             "Tamu": "Maximal 200 pax", 
-            "Detail": "Worked closely for two months prior. 1 Professional Wedding Manager, 4 Wedding Crew, Online Progress Meeting (3x), Offline Assist (2x), Technical Meeting (1x), Snack & Transport (Jabodetabek), Guidance Book & Wedding Report, 6 Hours Worktime on Wedding Day."
+            "Detail": [
+                "**Periode Kerja:** Worked closely for two months prior.",
+                "**Team Kerja:** 1 Professional Wedding Manager + 4 Wedding Crew",
+                "**Konsultasi:** Online Progress Meeting (3x), Offline Assist (2x), Technical Meeting (1x)",
+                "**Logistik:** Snack & Transport (Jabodetabek), Guidance Book & Wedding Report",
+                "**Durasi Hari H:** 6 Hours Worktime on Wedding Day."
+            ]
         },
         {
             "Nama": "Full Wedding (Akad & Resepsi)", 
             "Harga": 10500000, 
             "Tamu": "Maximal 800 pax", 
-            "Detail": "Worked closely for two months prior. 1 Professional Project Leader, 8 Project Crew, Online Progress Meeting (5x), Offline Assist (3x), Technical Meeting (1x), Snack & Transport (Jabodetabek), Guidance Book, 8 Hours Worktime on Wedding Day."
+            "Detail": [
+                "**Periode Kerja:** Worked closely for two months prior.",
+                "**Team Kerja:** 1 Professional Project Leader + 8 Project Crew",
+                "**Konsultasi:** Online Progress Meeting (5x), Offline Assist (3x), Technical Meeting (1x)",
+                "**Logistik:** Snack & Transport (Jabodetabek), Guidance Book Included",
+                "**Durasi Hari H:** 8 Hours Worktime on Wedding Day."
+            ]
         }
     ],
     "Wedding Planner Only": [
@@ -75,12 +92,13 @@ PRICELIST_PACKAGES = {
             "Nama": "Full Wedding Planner Service", 
             "Harga": 36499000, 
             "Tamu": "Maximal 1000 pax", 
-            "Detail": """
-            Worked closely for 6-7 months prior.
-            • **Preparation:** Progress Meeting by Online (3x), Assisting survey venue (3x), Assisting fitting attire (2x), Assisting concepting decor offline (1x), Assisting test food (2x), Provide max 3 options for each vendor, Technical Meeting (1x), Guidance Book, Drafting Rundown, Project Timeline, Budget plan (RAB), Vendor management, Handling KUA administration, Unlimited consultation via WA, Snack TM.
-            • **On The Day:** 1 Professional Wedding Manager, 8 Wedding Manpower, 10 Hours Service, Wedding Report, Marriage Document Handling (KUA Jabodetabek City Only).
-            • **EXTRA BONUS:** 1 Night Stay at Four Season/Langham, 100 pax hype stall Teazzi.
-            """
+            "Detail": [
+                "**Periode Kerja:** Worked closely for 6-7 months prior.",
+                "**Preparation & Planning:** Progress Meeting by Online (3x), Assisting survey venue (3x), Assisting fitting attire (2x), Assisting concepting decor offline (1x), Assisting test food (2x).",
+                "**Vendor & Dokumen:** Provide max 3 options for each vendor, Technical Meeting (1x), Guidance Book, Drafting Rundown, Project Timeline, Budget plan (RAB), Vendor management, Handling KUA administration, Unlimited consultation via WA, Snack TM.",
+                "**On The Day Services:** 1 Professional Wedding Manager + 8 Wedding Manpower, 10 Hours Service, Wedding Report, Marriage Document Handling (KUA Jabodetabek City Only).",
+                "**EXTRA BONUS:** 1 Night Stay at Four Season/Langham, 100 pax hype stall Teazzi."
+            ]
         }
     ]
 }
@@ -138,13 +156,15 @@ if menu == "💰 Lihat Price List Resmi 2026":
                 with st.expander(f"{item['Nama']} — {format_rupiah(item['Harga'])}"):
                     st.write(f"**Kapasitas:** {item['Tamu']}")
                     st.markdown("**Detail Paket Resmi:**")
-                    st.markdown(item['Detail'])
+                    # looping poin agar terpisah menjadi paragraf baru ke bawah
+                    for sub_detail in item['Detail']:
+                        st.markdown(sub_detail)
+                        st.write("") # memberi jarak antar paragraf
                     
     with tab2:
         st.markdown("### 🏨 Daftar Venue & Harga Paket All-In (100 - 300 PAX)")
         st.caption("*Catatan: Tanda bintang (*) menunjukkan venue hotel/resto dengan catering in-house.")
         
-        # Format angka di tabel agar ada Rp dan titik bintik tanda baca harganya
         formatted_venues = []
         for v in VENUE_PACKAGES:
             formatted_venues.append({
@@ -191,7 +211,7 @@ elif menu == "➕ Input Klien Baru (Tanpa Excel)":
                 "Nama Klien": nama_klien, "Pengantin Wanita": p_wanita, "Pengantin Pria": p_pria,
                 "WhatsApp": wa_aktif, "Tanggal Pernikahan": str(tgl_nikah), "Kota": kota,
                 "Estimasi Tamu": tamu, "Status Venue": venue_status, "Nama Venue": nama_venue,
-                "Konsep":概念, "Budget": budget, "Layanan WO": layanan, "Kendala": kendala
+                "Konsep": konsep, "Budget": budget, "Layanan WO": layanan, "Kendala": kendala
             }
             st.session_state.client_db.append(new_data)
             st.success(f"🎉 Sukses menyimpan data {nama_klien}!")
@@ -222,7 +242,6 @@ else:
         
     st.markdown("---")
     
-    # SYSTEM REKOMENDASI OTOMATIS DENGAN FORMAT RP & TITIK BACA
     st.markdown("### 🤖 Rekomendasi Paket Otomatis dari 1 Destiny untuk Klien Ini:")
     
     tamu_clean = client_data['Estimasi Tamu'] 
@@ -236,7 +255,7 @@ else:
         for v in VENUE_PACKAGES:
             if v["Kota"] == kota_klien:
                 match_found = True
-                key_pax = tamu_clean.replace(" ", "") # menghasilkan "100pax", "200pax", atau "300pax"
+                key_pax = tamu_clean.replace(" ", "") 
                 harga_paket = v.get(key_pax, None)
                 
                 if harga_paket:
