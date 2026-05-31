@@ -17,7 +17,7 @@ st.markdown("""
 
 # 2. DATA DATABASE INTERNAL PRICELIST 2026 (Berdasarkan Brosur Anda)
 PRICELIST_PACKAGES = {
-    "Exclude Venue & Catering (Paket Agnostik)": [
+    "Exclude Venue & Catering": [
         {"Nama": "Intimate Package (Exclude)", "Harga": 51699000, "Tamu": "Maks. 300 pax", "Detail": "Planner (3x Progress, 1x TM), Dekor Backdrop 5m, Dokumentasi 6 Jam, MC Akad+Resepsi, MUA & Attire Bride/Groom + Orang Tua, 4 Crew WO on Day."},
         {"Nama": "Full Wedding Package (Exclude)", "Harga": 75999000, "Tamu": "Maks. 600 pax", "Detail": "Planner (3x Progress, 1x TM), Pelaminan 8m, Dokumentasi 8 Jam, MC, MUA Premium, Entertainment (Singer + Keyboard/Guitar + Sound 2000W), 5-6 Crew WO on Day."}
     ],
