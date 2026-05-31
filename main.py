@@ -86,10 +86,10 @@ VENUE_PACKAGES = [
     {"Kota": "Jakarta", "Nama": "Calathea Lutea", "Prices": {"400pax": 192799000, "500pax": 202799000, "600pax": 212799000, "700pax": 222799000}, "Kapasitas": 800, "Tipe": "Medium"}
 ]
 
-# 3. DATABASE VENDOR REKANAN (UPDATED LINK AESTEC & CAMON SESUAI INSTRUKSI)
+# 3. DATABASE VENDOR REKANAN (LINK SESUAI BROSUR TERBARU)
 VENDOR_LIST = [
     {"Kategori": "Wedding planner/organizer", "Nama Vendor": "1 Destiny Wedding Organizer", "Instagram": "https://www.instagram.com/1destiny.wo/", "Dokumen / GDrive": "-"},
-    {"Kategori": "Documentation", "Nama Vendor": "Aestec", "Instagram": "https://www.instagram.com/aestec.wedding/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9yLycXmSPnt" target="_blank">📁 Buka Portfolio</a>'},
+    {"Kategori": "Documentation", "Nama Vendor": "Aestec", "Instagram": "https://www.instagram.com/aestec.wedding/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9LycXmSPnt" target="_blank">📁 Buka Portfolio</a>'},
     {"Kategori": "Documentation", "Nama Vendor": "Camonphoto", "Instagram": "https://www.instagram.com/camonphoto/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1SJSmYKFuQlF92M_q_UGzHc4KgLuRsf0J" target="_blank">📁 Buka Portfolio</a>'},
     {"Kategori": "Decoration", "Nama Vendor": "Fashdecor", "Instagram": "https://www.instagram.com/fashdecor.id/?hl=en", "Dokumen / GDrive": "-"},
     {"Kategori": "MUA & Attire", "Nama Vendor": "Micca Brides", "Instagram": "https://www.instagram.com/miccabrides/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1N-GSGPwICyhcUdlvSF1o1uPPgzcgkK_L/" target="_blank">📄 Catalog Micca</a><br><a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i/" target="_blank">💄 MUA Bride</a><br><a href="https://drive.google.com/drive/folders/1aLYchVrKgc54et_pEJF9j0XpBsuDc9Ly" target="_blank">👩 MUA Mom</a>'},
@@ -105,7 +105,7 @@ VENDOR_LIST = [
 if 'client_db' not in st.session_state:
     st.session_state.client_db = [
         {
-            "Nama Klien": "1Destiny - Siti & Budi", "Pengantin Wanita": "Siti Aliyah", "Pengantin Pria": "Budi Santoso",
+            "Nama Klien": "Skrining - Siti & Budi", "Pengantin Wanita": "Siti Aliyah", "Pengantin Pria": "Budi Santoso",
             "WhatsApp": "6281234567890", "Email": "siti.budi@email.com", "Instagram": "@siti_aliyah",
             "Tanggal Pernikahan": "2026-12-12", "Kota": "Jakarta", "Jenis Acara": "Akad Nikah - Resepsi",
             "Estimasi Tamu": "300", "Venue Status": "Sudah Survey Beberapa Venue", "Nama Venue": "Pejaten Terrace",
@@ -113,22 +113,20 @@ if 'client_db' not in st.session_state:
         }
     ]
 
-# 5. SIDEBAR NAVIGATION (TAMBAHAN MENU CATERING)
+# 5. SIDEBAR NAVIGATION
 st.sidebar.title("1 Destiny WO 2026")
 menu = st.sidebar.radio("Navigasi Konten:", [
     "📋 Lihat Summary Kebutuhan Klien", 
-    "➕ Input Klien Baru (Form Baru)", 
+    "➕ Input Klien Baru (Form Skrining Baru)", 
     "💰 Lihat Price List Resmi 2026",
     "🍲 Catering Menu Selection",
     "🤝 Our Vendor List & Portfolio"
 ])
 
-# ==================== MENU: CATERING MENU SELECTION (FITUR TAB BARU) ====================
+# ==================== MENU: CATERING MENU SELECTION ====================
 if menu == "🍲 Catering Menu Selection":
     st.subheader("🍲 Blessing Catering - Menu & Package Specifications (2026)")
-    
     cat_tab1, cat_tab2 = st.tabs(["📊 Rasio Porsi Porsi Paket", "🍽️ Pilihan Varian Hidangan Utama & Penutup"])
-    
     with cat_tab1:
         st.markdown("### 📋 Komposisi Makanan Berdasarkan Kapasitas Undangan")
         c1, c2, c3, c4 = st.columns(4)
@@ -144,34 +142,23 @@ if menu == "🍲 Catering Menu Selection":
         with c4:
             st.success("**🍗 400 Pax Package**")
             st.markdown("* ✔ VIP Buffet 500 Pax\n* ✔ Regular Buffet 325 Pax\n* ✔ Food Stall @ 150 Pax:\n  - Baso / Baso Malang\n  - Siomay / Sate\n  - Lasagna / Macaroni Schotel\n  - Brownies Ice Cream\n* 🎁 *Bonus: Free makanan akad 100 pax + mineral*")
-
     with cat_tab2:
         col_m1, col_m2 = st.columns(2)
         with col_m1:
             st.markdown("### 🍛 Hidangan Utama (Main Buffet)")
-            with st.expander("🌾 Nasi Putih & Kreasi Nasi", expanded=True):
-                st.write("Nasi Putih / Nasi Goreng Daging Asap / Nasi Goreng Thailand / Nasi Goreng Kari / Nasi Pandan Teri")
-            with st.expander("🥣 Sop / Soto", expanded=True):
-                st.write("Sop Kimlo / Sop Ayam Kembang Tahu / Sop Baso Lohua / Soto Ayam")
-            with st.expander("🐔 Hidangan Ayam", expanded=True):
-                st.write("Ayam Lada Hitam / Ayam Kungpao / Ayam Saus Padang")
-            with st.expander("🥩 Hidangan Daging", expanded=True):
-                st.write("Daging Teriyaki / Daging Lada Hitam / Daging Yakiniku / Daging Cabe Ijo")
-            with st.expander("🥗 Sayur / Pendamping", expanded=True):
-                st.write("Cah Brokoli / Sapo Tahu / Asinan Pengantin / Soun Goreng / Mie Goreng")
-            with st.expander("🥖 Pelengkap", expanded=True):
-                st.write("Kerupuk / Dessert / Beverages")
-                
+            with st.expander("🌾 Nasi Putih & Kreasi Nasi", expanded=True): st.write("Nasi Putih / Nasi Goreng Daging Asap / Nasi Goreng Thailand / Nasi Goreng Kari / Nasi Pandan Teri")
+            with st.expander("🥣 Sop / Soto", expanded=True): st.write("Sop Kimlo / Sop Ayam Kembang Tahu / Sop Baso Lohua / Soto Ayam")
+            with st.expander("🐔 Hidangan Ayam", expanded=True): st.write("Ayam Lada Hitam / Ayam Kungpao / Ayam Saus Padang")
+            with st.expander("🥩 Hidangan Daging", expanded=True): st.write("Daging Teriyaki / Daging Lada Hitam / Daging Yakiniku / Daging Cabe Ijo")
+            with st.expander("🥗 Sayur / Pendamping", expanded=True): st.write("Cah Brokoli / Sapo Tahu / Asinan Pengantin / Soun Goreng / Mie Goreng")
+            with st.expander("🥖 Pelengkap", expanded=True): st.write("Kerupuk / Dessert / Beverages")
         with col_m2:
             st.markdown("### 🍧 Dessert, Pudding & Beverages Menu")
-            with st.expander("🍰 Snack / Cake", expanded=True):
-                st.write("Pie Keju / Pie Cokelat / Pie Buah / Kue Sus Vanila / Kue Sus Cokelat / Eggclair Mini / Red Velvet Tart / Tiramisu Tart / Cheese Tart / Choco Tart / Caramel Tart / Orange Tart / Peach Puff / Strawberry Puff / Mini Sosis Solo / Macaroni Bites / Mini Sausage Puff / Beef Croquette")
-            with st.expander("🍮 Pudding", expanded=True):
-                st.write("Mangga / Kelapa / Jeruk / Stroberi / Peach / Leci / Mocca / Caramel / Lumut / Susu / Cokelat")
-            with st.expander("🍹 Soft Drink & Beverages", expanded=True):
-                st.write("Lemon Tea / Blackcurrant Tea / Orange Juice / Guava Juice / Mango Juice / Fanta / Cola / Sprite / Infused Water / Lychee Tea / Lemonade")
+            with st.expander("🍰 Snack / Cake", expanded=True): st.write("Pie Keju / Pie Cokelat / Pie Buah / Kue Sus Vanila / Kue Sus Cokelat / Eggclair Mini / Red Velvet Tart / Tiramisu Tart / Cheese Tart / Choco Tart / Caramel Tart / Orange Tart / Peach Puff / Strawberry Puff / Mini Sosis Solo / Macaroni Bites / Mini Sausage Puff / Beef Croquette")
+            with st.expander("🍮 Pudding", expanded=True): st.write("Mangga / Kelapa / Jeruk / Stroberi / Peach / Leci / Mocca / Caramel / Lumut / Susu / Cokelat")
+            with st.expander("🍹 Soft Drink & Beverages", expanded=True): st.write("Lemon Tea / Blackcurrant Tea / Orange Juice / Guava Juice / Mango Juice / Fanta / Cola / Sprite / Infused Water / Lychee Tea / Lemonade")
 
-# ==================== MENU: OUR VENDOR LIST & PORTFOLIO ====================
+# ==================== MENU: OUR VENDOR LIST & PORTFOLIO (SQUARE GALERI LENGKAP 1 - 28) ====================
 elif menu == "🤝 Our Vendor List & Portfolio":
     st.subheader("🤝 1 Destiny Official Vendor List & Portfolio (2026)")
     tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto Portfolio Terbaik"])
@@ -189,50 +176,58 @@ elif menu == "🤝 Our Vendor List & Portfolio":
         st.write(pd.DataFrame(formatted_vendors).to_html(escape=False, index=False), unsafe_allow_html=True)
         
     with tab_galeri:
-        st.markdown("### 🌟 Dokumentasi Real-Event Portfolio")
+        st.markdown("### 🌟 Dokumentasi Real-Event Portfolio (Foto 1 - 28)")
         st.write("")
+        
+        # Grid 1: Foto 1 s/d 4
         c1, c2, c3, c4 = st.columns(4)
         with c1: st.image("Dokumentasi1.jpg", use_container_width=True)
         with c2: st.image("Dokumentasi2.jpg", use_container_width=True)
         with c3: st.image("Dokumentasi3.jpg", use_container_width=True)
         with c4: st.image("Dokumentasi4.jpg", use_container_width=True)
         
+        # Grid 2: Foto 5 s/d 8
         c5, c6, c7, c8 = st.columns(4)
         with c5: st.image("Dokumentasi5.jpg", use_container_width=True)
         with c6: st.image("Dokumentasi6.jpg", use_container_width=True)
         with c7: st.image("Dokumentasi7.jpg", use_container_width=True)
         with c8: st.image("Dokumentasi8.jpg", use_container_width=True)
         
+        # Grid 3: Foto 9 s/d 12
         c9, c10, c11, c12 = st.columns(4)
         with c9: st.image("Dokumentasi9.jpg", use_container_width=True)
         with c10: st.image("Dokumentasi10.jpg", use_container_width=True)
         with c11: st.image("Dokumentasi12.jpg", use_container_width=True)
         with c12: st.image("Dokumentasi11.jpg", use_container_width=True)
         
+        # Grid 4: Foto 13 s/d 16
         c13, c14, c15, c16 = st.columns(4)
         with c13: st.image("Dokumentasi13.jpg", use_container_width=True)
         with c14: st.image("Dokumentasi14.jpg", use_container_width=True)
         with c15: st.image("Dokumentasi15.jpg", use_container_width=True)
         with c16: st.image("Dokumentasi16.jpg", use_container_width=True)
-
+        
+        # Grid 5: Foto 17 s/d 20
         c17, c18, c19, c20 = st.columns(4)
         with c17: st.image("Dokumentasi17.jpg", use_container_width=True)
         with c18: st.image("Dokumentasi18.jpg", use_container_width=True)
         with c19: st.image("Dokumentasi19.jpg", use_container_width=True)
         with c20: st.image("Dokumentasi20.jpg", use_container_width=True)
-
+        
+        # Grid 6: Foto 21 s/d 24
         c21, c22, c23, c24 = st.columns(4)
         with c21: st.image("Dokumentasi21.jpg", use_container_width=True)
         with c22: st.image("Dokumentasi22.jpg", use_container_width=True)
         with c23: st.image("Dokumentasi23.jpg", use_container_width=True)
         with c24: st.image("Dokumentasi24.jpg", use_container_width=True)
-
+        
+        # Grid 7: Foto 25 s/d 28
         c25, c26, c27, c28 = st.columns(4)
         with c25: st.image("Dokumentasi25.jpg", use_container_width=True)
         with c26: st.image("Dokumentasi26.jpg", use_container_width=True)
         with c27: st.image("Dokumentasi27.jpg", use_container_width=True)
         with c28: st.image("Dokumentasi28.jpg", use_container_width=True)
-            
+
 # ==================== MENU: LIHAT PRICELIST RESMI ====================
 elif menu == "💰 Lihat Price List Resmi 2026":
     st.subheader("📑 Katalog & Price List Resmi 1 Destiny (2026)")
@@ -261,9 +256,9 @@ elif menu == "💰 Lihat Price List Resmi 2026":
             })
         st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
-# ==================== MENU: FORM BARU ====================
-elif menu == "➕ Input Klien Baru (Form Baru)":
-    st.subheader("📝 Form Klien Baru")
+# ==================== MENU: FORM SKRINING BARU ====================
+elif menu == "➕ Input Klien Baru (Form Skrining Baru)":
+    st.subheader("📝 Form Skrining Klien Baru")
     with st.form("screening_form", clear_on_submit=True):
         col1, col2 = st.columns(2)
         with col1:
@@ -286,7 +281,7 @@ elif menu == "➕ Input Klien Baru (Form Baru)":
             st.markdown("#### 📝 Tambahan")
             notes = st.text_area("Notes lainnya")
             
-        submit_btn = st.form_submit_button("🚀 Simpan Hasil")
+        submit_btn = st.form_submit_button("🚀 Simpan Hasil Skrining")
         if submit_btn and p_wanita and p_pria:
             auto_label = f"Skrining - {p_wanita.split()[0]} & {p_pria.split()[0]}"
             new_data = {
@@ -305,7 +300,7 @@ else:
     selected_client_name = st.sidebar.selectbox("Pilih Klien untuk Ditampilkan:", client_list)
     client_data = next(c for c in st.session_state.client_db if c["Nama Klien"] == selected_client_name)
     
-    st.subheader(f"📋 Summary Hasil: {client_data['Nama Klien']}")
+    st.subheader(f"📋 Summary Hasil Skrining: {client_data['Nama Klien']}")
     
     c1, c2, c3 = st.columns(3)
     with c1:
