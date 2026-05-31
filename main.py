@@ -30,16 +30,21 @@ def format_rupiah(angka):
         return f"Rp {angka:,.0f}".replace(",", ".")
     return str(angka)
 
-# Fungsi aman untuk menampilkan gambar tanpa takut error jika file tidak ada
-def tampilkan_gambar_aman(nama_file):
-    if os.path.exists(nama_file):
-        st.image(nama_file, use_container_width=True)
+# FUNGSI PINTAR BARU: Otomatis ngecek format .jpg maupun .jpeg agar tidak error
+def tampilkan_gambar_aman(base_name):
+    file_jpg = f"{base_name}.jpg"
+    file_jpeg = f"{base_name}.jpeg"
+    
+    if os.path.exists(file_jpg):
+        st.image(file_jpg, use_container_width=True)
+    elif os.path.exists(file_jpeg):
+        st.image(file_jpeg, use_container_width=True)
     else:
-        # Jika file foto belum ada di GitHub, tampilkan kotak abu-abu estetik sebagai pengganti sementara
+        # Tampilan kotak abu-abu jika file benar-benar belum diupload di GitHub
         st.markdown(
             f"<div style='height:280px; background-color:#E0E0E0; border-radius:12px; "
             f"display:flex; align-items:center; justify-content:center; color:#757575; "
-            f"font-size:14px; font-weight:bold;'>📸 {nama_file}<br>(Belum Terupload)</div>", 
+            f"font-size:14px; font-weight:bold; text-align:center;'>📸 {base_name}<br>(Belum Terupload)</div>", 
             unsafe_allow_html=True
         )
 
@@ -170,10 +175,10 @@ if menu == "🍲 Catering Menu Selection":
             with st.expander("🍮 Pudding", expanded=True): st.write("Mangga / Kelapa / Jeruk / Stroberi / Peach / Leci / Mocca / Caramel / Lumut / Susu / Cokelat")
             with st.expander("🍹 Soft Drink & Beverages", expanded=True): st.write("Lemon Tea / Blackcurrant Tea / Orange Juice / Guava Juice / Mango Juice / Fanta / Cola / Sprite / Infused Water / Lychee Tea / Lemonade")
 
-# ==================== MENU: OUR VENDOR LIST & PORTFOLIO (SQUARE GALERI DENGAN AGNOSTIC CHECKER) ====================
+# ==================== MENU: OUR VENDOR LIST & PORTFOLIO ====================
 elif menu == "🤝 Our Vendor List & Portfolio":
     st.subheader("🤝 1 Destiny Official Vendor List & Portfolio (2026)")
-    tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto"])
+    tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto Portfolio Terbaik"])
     
     with tab_list:
         st.info("Klik tombol 'Buka Instagram' atau link Google Drive di sebelah kanan untuk melihat kelengkapan dokumen.")
@@ -191,13 +196,13 @@ elif menu == "🤝 Our Vendor List & Portfolio":
         st.markdown("### 🌟 Dokumentasi Real-Event Portfolio (Foto 1 - 28)")
         st.write("")
         
-        # Loop otomatis menggantikan sistem grid manual agar tahan dari crash error media file
+        # Loop otomatis pintar yang mendukung deteksi .jpg maupun .jpeg sekaligus
         idx_foto = 1
-        for _ in range(7): # 7 baris x 4 kolom = 28 foto
+        for _ in range(7): 
             cols = st.columns(4)
             for col in cols:
                 with col:
-                    tampilkan_gambar_aman(f"Dokumentasi{idx_foto}.jpg")
+                    tampilkan_gambar_aman(f"Dokumentasi{idx_foto}")
                 idx_foto += 1
 
 # ==================== MENU: LIHAT PRICELIST RESMI ====================
