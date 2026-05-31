@@ -89,7 +89,7 @@ VENUE_PACKAGES = [
 # 3. DATABASE VENDOR REKANAN (UPDATED LINK AESTEC & CAMON SESUAI INSTRUKSI)
 VENDOR_LIST = [
     {"Kategori": "Wedding planner/organizer", "Nama Vendor": "1 Destiny Wedding Organizer", "Instagram": "https://www.instagram.com/1destiny.wo/", "Dokumen / GDrive": "-"},
-    {"Kategori": "Documentation", "Nama Vendor": "Aestec", "Instagram": "https://www.instagram.com/aestec.wedding/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9LycXmSPnt" target="_blank">📁 Buka Portfolio</a>'},
+    {"Kategori": "Documentation", "Nama Vendor": "Aestec", "Instagram": "https://www.instagram.com/aestec.wedding/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9yLycXmSPnt" target="_blank">📁 Buka Portfolio</a>'},
     {"Kategori": "Documentation", "Nama Vendor": "Camonphoto", "Instagram": "https://www.instagram.com/camonphoto/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1SJSmYKFuQlF92M_q_UGzHc4KgLuRsf0J" target="_blank">📁 Buka Portfolio</a>'},
     {"Kategori": "Decoration", "Nama Vendor": "Fashdecor", "Instagram": "https://www.instagram.com/fashdecor.id/?hl=en", "Dokumen / GDrive": "-"},
     {"Kategori": "MUA & Attire", "Nama Vendor": "Micca Brides", "Instagram": "https://www.instagram.com/miccabrides/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1N-GSGPwICyhcUdlvSF1o1uPPgzcgkK_L/" target="_blank">📄 Catalog Micca</a><br><a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i/" target="_blank">💄 MUA Bride</a><br><a href="https://drive.google.com/drive/folders/1aLYchVrKgc54et_pEJF9j0XpBsuDc9Ly" target="_blank">👩 MUA Mom</a>'},
