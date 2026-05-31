@@ -123,7 +123,7 @@ VENDOR_LIST = [
 if 'client_db' not in st.session_state:
     st.session_state.client_db = [
         {
-            "Nama Klien": "Skrining - Siti & Budi", "Pengantin Wanita": "Siti Aliyah", "Pengantin Pria": "Budi Santoso",
+            "Nama Klien": "1Destiny - Siti & Budi", "Pengantin Wanita": "Siti Aliyah", "Pengantin Pria": "Budi Santoso",
             "WhatsApp": "6281234567890", "Email": "siti.budi@email.com", "Instagram": "@siti_aliyah",
             "Tanggal Pernikahan": "2026-12-12", "Kota": "Jakarta", "Jenis Acara": "Akad Nikah - Resepsi",
             "Estimasi Tamu": "300", "Venue Status": "Sudah Survey Beberapa Venue", "Nama Venue": "Pejaten Terrace",
@@ -134,7 +134,7 @@ if 'client_db' not in st.session_state:
 st.sidebar.title("1 Destiny WO 2026")
 menu = st.sidebar.radio("Navigasi Konten:", [
     "📋 Lihat Summary Kebutuhan Klien", 
-    "➕ Input Klien Baru (Form Skrining Baru)", 
+    "➕ Input Klien Baru (Form Baru)", 
     "💰 Lihat Price List Resmi 2026",
     "🍲 Catering Menu Selection",
     "🤝 Our Vendor List & Portfolio"
@@ -233,9 +233,9 @@ elif menu == "💰 Lihat Price List Resmi 2026":
             })
         st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
-# ==================== MENU: FORM SKRINING BARU ====================
-elif menu == "➕ Input Klien Baru (Form Skrining Baru)":
-    st.subheader("📝 Form Skrining Klien Baru")
+# ==================== MENU: FORM BARU ====================
+elif menu == "➕ Input Klien Baru (Form Baru)":
+    st.subheader("📝 Form Klien Baru")
     with st.form("screening_form", clear_on_submit=True):
         col1, col2 = st.columns(2)
         with col1:
@@ -258,7 +258,7 @@ elif menu == "➕ Input Klien Baru (Form Skrining Baru)":
             st.markdown("#### 📝 Tambahan")
             notes = st.text_area("Notes lainnya")
             
-        submit_btn = st.form_submit_button("🚀 Simpan Hasil Skrining")
+        submit_btn = st.form_submit_button("🚀 Simpan Hasil")
         if submit_btn and p_wanita and p_pria:
             auto_label = f"Skrining - {p_wanita.split()[0]} & {p_pria.split()[0]}"
             new_data = {
