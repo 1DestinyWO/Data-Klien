@@ -5,7 +5,7 @@ from datetime import datetime
 # 1. SETUP HALAMAN & TEMA UTAMA
 st.set_page_config(page_title="1 Destiny - Client Management Dashboard", layout="wide", page_icon="👰")
 
-# Custom CSS Estetika & Format Kardus Harga
+# Custom CSS Estetika, Format Tampilan Paket, & Tabel
 st.markdown("""
     <style>
     .main {background-color: #f8f9fa;}
@@ -13,7 +13,7 @@ st.markdown("""
     .stButton>button {background-color: #4CAF50; color: white; border-radius: 8px; width: 100%;}
     .price-tag { background-color: #E8F5E9; padding: 12px; border-left: 5px solid #2E7D32; font-weight: bold; font-size: 18px; color: #1B5E20; margin: 10px 0;}
     
-    /* Trik CSS memaksa semua foto menjadi kotak / square simetris */
+    /* CSS memaksa semua foto portfolio menjadi kotak / square simetris */
     img {
         width: 100% !important;
         height: 280px !important;
@@ -86,38 +86,13 @@ VENUE_PACKAGES = [
     {"Kota": "Jakarta", "Nama": "Calathea Lutea", "Prices": {"400pax": 192799000, "500pax": 202799000, "600pax": 212799000, "700pax": 222799000}, "Kapasitas": 800, "Tipe": "Medium"}
 ]
 
-# 3. DATABASE VENDOR REKANAN (LINK DIVE SUDAH DIPERBAIKI TOTAL AGAR TIDAK TERTUKAR)
+# 3. DATABASE VENDOR REKANAN (UPDATED LINK AESTEC & CAMON SESUAI INSTRUKSI)
 VENDOR_LIST = [
-    {
-        "Kategori": "Wedding planner/organizer", 
-        "Nama Vendor": "1 Destiny Wedding Organizer", 
-        "Instagram": "https://www.instagram.com/1destiny.wo/",
-        "Dokumen / GDrive": "-"
-    },
-    {
-        "Kategori": "Documentation", 
-        "Nama Vendor": "Aestec", 
-        "Instagram": "https://www.instagram.com/aestec.wedding/",
-        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9LycXmSPnt" target="_blank">📁 Buka Portfolio</a>'
-    },
-    {
-        "Kategori": "Documentation", 
-        "Nama Vendor": "Camonphoto", 
-        "Instagram": "https://www.instagram.com/camonphoto/",
-        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i" target="_blank">📁 Buka Portfolio</a>'
-    },
-    {
-        "Kategori": "Decoration", 
-        "Nama Vendor": "Fashdecor", 
-        "Instagram": "https://www.instagram.com/fashdecor.id/?hl=en",
-        "Dokumen / GDrive": "-"
-    },
-    {
-        "Kategori": "MUA & Attire", 
-        "Nama Vendor": "Micca Brides", 
-        "Instagram": "https://www.instagram.com/miccabrides/",
-        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1N-GSGPwICyhcUdlvSF1o1uPPgzcgkK_L/" target="_blank">📄 Catalog Micca</a><br><a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i/" target="_blank">💄 MUA Bride</a><br><a href="https://drive.google.com/drive/folders/1aLYchVrKgc54et_pEJF9j0XpBsuDc9Ly" target="_blank">👩 MUA Mom</a>'
-    },
+    {"Kategori": "Wedding planner/organizer", "Nama Vendor": "1 Destiny Wedding Organizer", "Instagram": "https://www.instagram.com/1destiny.wo/", "Dokumen / GDrive": "-"},
+    {"Kategori": "Documentation", "Nama Vendor": "Aestec", "Instagram": "https://www.instagram.com/aestec.wedding/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9LycXmSPnt" target="_blank">📁 Buka Portfolio</a>'},
+    {"Kategori": "Documentation", "Nama Vendor": "Camonphoto", "Instagram": "https://www.instagram.com/camonphoto/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1SJSmYKFuQlF92M_q_UGzHc4KgLuRsf0J" target="_blank">📁 Buka Portfolio</a>'},
+    {"Kategori": "Decoration", "Nama Vendor": "Fashdecor", "Instagram": "https://www.instagram.com/fashdecor.id/?hl=en", "Dokumen / GDrive": "-"},
+    {"Kategori": "MUA & Attire", "Nama Vendor": "Micca Brides", "Instagram": "https://www.instagram.com/miccabrides/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1N-GSGPwICyhcUdlvSF1o1uPPgzcgkK_L/" target="_blank">📄 Catalog Micca</a><br><a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i/" target="_blank">💄 MUA Bride</a><br><a href="https://drive.google.com/drive/folders/1aLYchVrKgc54et_pEJF9j0XpBsuDc9Ly" target="_blank">👩 MUA Mom</a>'},
     {"Kategori": "MC", "Nama Vendor": "Mawadah", "Instagram": "https://www.instagram.com/mawadah_mc?igsh=Y2pkdXF0d2NlemQy/", "Dokumen / GDrive": "-"},
     {"Kategori": "MC", "Nama Vendor": "Mulyadi", "Instagram": "https://www.instagram.com/mulyadi_mc?igsh=NWY1ZWhpOWlkNGpk/", "Dokumen / GDrive": "-"},
     {"Kategori": "MC", "Nama Vendor": "Dewi MC", "Instagram": "https://www.instagram.com/dewinurmc?igsh=MW5xcjNiZGRldWxkeA==", "Dokumen / GDrive": "-"},
@@ -126,29 +101,78 @@ VENDOR_LIST = [
     {"Kategori": "Entertainment (Optional)", "Nama Vendor": "SWAG Project", "Instagram": "https://www.instagram.com/swag_project?igsh=a3A5YzgyZ3V3ZXBz", "Dokumen / GDrive": "-"}
 ]
 
-# 4. INITIALIZE SIMULASI DATABASE KLIEN DI SESSION STATE
+# 4. INITIALIZE SIMULASI DATABASE KLIEN
 if 'client_db' not in st.session_state:
     st.session_state.client_db = [
         {
             "Nama Klien": "Skrining - Siti & Budi", "Pengantin Wanita": "Siti Aliyah", "Pengantin Pria": "Budi Santoso",
             "WhatsApp": "6281234567890", "Email": "siti.budi@email.com", "Instagram": "@siti_aliyah",
-            "Tanggal Pernikahan": "2026-12-12", "Kota :": "Jakarta", "Jenis Acara": "Akad Nikah - Resepsi",
+            "Tanggal Pernikahan": "2026-12-12", "Kota": "Jakarta", "Jenis Acara": "Akad Nikah - Resepsi",
             "Estimasi Tamu": "300", "Venue Status": "Sudah Survey Beberapa Venue", "Nama Venue": "Pejaten Terrace",
             "Preference Venue": "Semi Outdoor", "Notes": "Mencari dekorasi dengan tema floral natural."
         }
     ]
 
-# 5. SIDEBAR NAVIGATION
+# 5. SIDEBAR NAVIGATION (TAMBAHAN MENU CATERING)
 st.sidebar.title("1 Destiny WO 2026")
 menu = st.sidebar.radio("Navigasi Konten:", [
     "📋 Lihat Summary Kebutuhan Klien", 
     "➕ Input Klien Baru (Form Skrining Baru)", 
     "💰 Lihat Price List Resmi 2026",
+    "🍲 Catering Menu Selection",
     "🤝 Our Vendor List & Portfolio"
 ])
 
+# ==================== MENU: CATERING MENU SELECTION (FITUR TAB BARU) ====================
+if menu == "🍲 Catering Menu Selection":
+    st.subheader("🍲 Blessing Catering - Menu & Package Specifications (2026)")
+    
+    cat_tab1, cat_tab2 = st.tabs(["📊 Rasio Porsi Porsi Paket", "🍽️ Pilihan Varian Hidangan Utama & Penutup"])
+    
+    with cat_tab1:
+        st.markdown("### 📋 Komposisi Makanan Berdasarkan Kapasitas Undangan")
+        c1, c2, c3, c4 = st.columns(4)
+        with c1:
+            st.success("**🍗 100 Pax Package**")
+            st.markdown("* ✔ Buffet 100 Pax\n* ✔ Food Stall @ 100 Pax:\n  - Baso Malang / Siomay\n  - Brownies Ice Cream")
+        with c2:
+            st.success("**🍗 200 Pax Package**")
+            st.markdown("* ✔ Buffet 200 Pax\n* ✔ Food Stall @ 100 Pax:\n  - Baso Malang / Siomay\n  - Brownies Ice Cream")
+        with c3:
+            st.success("**🍗 300 Pax Package**")
+            st.markdown("* ✔ Buffet 300 Pax\n* ✔ Food Stall @ 100 Pax:\n  - Baso / Baso Malang\n  - Siomay / Sate\n  - Brownies Ice Cream\n* 🎁 *Bonus: Free makanan akad 100 pax + mineral*")
+        with c4:
+            st.success("**🍗 400 Pax Package**")
+            st.markdown("* ✔ VIP Buffet 500 Pax\n* ✔ Regular Buffet 325 Pax\n* ✔ Food Stall @ 150 Pax:\n  - Baso / Baso Malang\n  - Siomay / Sate\n  - Lasagna / Macaroni Schotel\n  - Brownies Ice Cream\n* 🎁 *Bonus: Free makanan akad 100 pax + mineral*")
+
+    with cat_tab2:
+        col_m1, col_m2 = st.columns(2)
+        with col_m1:
+            st.markdown("### 🍛 Hidangan Utama (Main Buffet)")
+            with st.expander("🌾 Nasi Putih & Kreasi Nasi", expanded=True):
+                st.write("Nasi Putih / Nasi Goreng Daging Asap / Nasi Goreng Thailand / Nasi Goreng Kari / Nasi Pandan Teri")
+            with st.expander("🥣 Sop / Soto", expanded=True):
+                st.write("Sop Kimlo / Sop Ayam Kembang Tahu / Sop Baso Lohua / Soto Ayam")
+            with st.expander("🐔 Hidangan Ayam", expanded=True):
+                st.write("Ayam Lada Hitam / Ayam Kungpao / Ayam Saus Padang")
+            with st.expander("🥩 Hidangan Daging", expanded=True):
+                st.write("Daging Teriyaki / Daging Lada Hitam / Daging Yakiniku / Daging Cabe Ijo")
+            with st.expander("🥗 Sayur / Pendamping", expanded=True):
+                st.write("Cah Brokoli / Sapo Tahu / Asinan Pengantin / Soun Goreng / Mie Goreng")
+            with st.expander("🥖 Pelengkap", expanded=True):
+                st.write("Kerupuk / Dessert / Beverages")
+                
+        with col_m2:
+            st.markdown("### 🍧 Dessert, Pudding & Beverages Menu")
+            with st.expander("🍰 Snack / Cake", expanded=True):
+                st.write("Pie Keju / Pie Cokelat / Pie Buah / Kue Sus Vanila / Kue Sus Cokelat / Eggclair Mini / Red Velvet Tart / Tiramisu Tart / Cheese Tart / Choco Tart / Caramel Tart / Orange Tart / Peach Puff / Strawberry Puff / Mini Sosis Solo / Macaroni Bites / Mini Sausage Puff / Beef Croquette")
+            with st.expander("🍮 Pudding", expanded=True):
+                st.write("Mangga / Kelapa / Jeruk / Stroberi / Peach / Leci / Mocca / Caramel / Lumut / Susu / Cokelat")
+            with st.expander("🍹 Soft Drink & Beverages", expanded=True):
+                st.write("Lemon Tea / Blackcurrant Tea / Orange Juice / Guava Juice / Mango Juice / Fanta / Cola / Sprite / Infused Water / Lychee Tea / Lemonade")
+
 # ==================== MENU: OUR VENDOR LIST & PORTFOLIO ====================
-if menu == "🤝 Our Vendor List & Portfolio":
+elif menu == "🤝 Our Vendor List & Portfolio":
     st.subheader("🤝 1 Destiny Official Vendor List & Portfolio (2026)")
     tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto Portfolio Terbaik"])
     
