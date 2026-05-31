@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import os
 
 # 1. SETUP HALAMAN & TEMA UTAMA
 st.set_page_config(page_title="1 Destiny - Client Management Dashboard", layout="wide", page_icon="👰")
@@ -28,6 +29,19 @@ def format_rupiah(angka):
     if isinstance(angka, (int, float)):
         return f"Rp {angka:,.0f}".replace(",", ".")
     return str(angka)
+
+# Fungsi aman untuk menampilkan gambar tanpa takut error jika file tidak ada
+def tampilkan_gambar_aman(nama_file):
+    if os.path.exists(nama_file):
+        st.image(nama_file, use_container_width=True)
+    else:
+        # Jika file foto belum ada di GitHub, tampilkan kotak abu-abu estetik sebagai pengganti sementara
+        st.markdown(
+            f"<div style='height:280px; background-color:#E0E0E0; border-radius:12px; "
+            f"display:flex; align-items:center; justify-content:center; color:#757575; "
+            f"font-size:14px; font-weight:bold;'>📸 {nama_file}<br>(Belum Terupload)</div>", 
+            unsafe_allow_html=True
+        )
 
 # 2. DATABASE INTERNAL PRICELIST 2026
 PRICELIST_PACKAGES = {
@@ -86,7 +100,7 @@ VENUE_PACKAGES = [
     {"Kota": "Jakarta", "Nama": "Calathea Lutea", "Prices": {"400pax": 192799000, "500pax": 202799000, "600pax": 212799000, "700pax": 222799000}, "Kapasitas": 800, "Tipe": "Medium"}
 ]
 
-# 3. DATABASE VENDOR REKANAN (LINK SESUAI BROSUR TERBARU)
+# 3. DATABASE VENDOR REKANAN
 VENDOR_LIST = [
     {"Kategori": "Wedding planner/organizer", "Nama Vendor": "1 Destiny Wedding Organizer", "Instagram": "https://www.instagram.com/1destiny.wo/", "Dokumen / GDrive": "-"},
     {"Kategori": "Documentation", "Nama Vendor": "Aestec", "Instagram": "https://www.instagram.com/aestec.wedding/", "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9LycXmSPnt" target="_blank">📁 Buka Portfolio</a>'},
@@ -101,7 +115,6 @@ VENDOR_LIST = [
     {"Kategori": "Entertainment (Optional)", "Nama Vendor": "SWAG Project", "Instagram": "https://www.instagram.com/swag_project?igsh=a3A5YzgyZ3V3ZXBz", "Dokumen / GDrive": "-"}
 ]
 
-# 4. INITIALIZE SIMULASI DATABASE KLIEN
 if 'client_db' not in st.session_state:
     st.session_state.client_db = [
         {
@@ -113,7 +126,6 @@ if 'client_db' not in st.session_state:
         }
     ]
 
-# 5. SIDEBAR NAVIGATION
 st.sidebar.title("1 Destiny WO 2026")
 menu = st.sidebar.radio("Navigasi Konten:", [
     "📋 Lihat Summary Kebutuhan Klien", 
@@ -158,7 +170,7 @@ if menu == "🍲 Catering Menu Selection":
             with st.expander("🍮 Pudding", expanded=True): st.write("Mangga / Kelapa / Jeruk / Stroberi / Peach / Leci / Mocca / Caramel / Lumut / Susu / Cokelat")
             with st.expander("🍹 Soft Drink & Beverages", expanded=True): st.write("Lemon Tea / Blackcurrant Tea / Orange Juice / Guava Juice / Mango Juice / Fanta / Cola / Sprite / Infused Water / Lychee Tea / Lemonade")
 
-# ==================== MENU: OUR VENDOR LIST & PORTFOLIO (SQUARE GALERI LENGKAP 1 - 28) ====================
+# ==================== MENU: OUR VENDOR LIST & PORTFOLIO (SQUARE GALERI DENGAN AGNOSTIC CHECKER) ====================
 elif menu == "🤝 Our Vendor List & Portfolio":
     st.subheader("🤝 1 Destiny Official Vendor List & Portfolio (2026)")
     tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto Portfolio Terbaik"])
@@ -179,54 +191,14 @@ elif menu == "🤝 Our Vendor List & Portfolio":
         st.markdown("### 🌟 Dokumentasi Real-Event Portfolio (Foto 1 - 28)")
         st.write("")
         
-        # Grid 1: Foto 1 s/d 4
-        c1, c2, c3, c4 = st.columns(4)
-        with c1: st.image("Dokumentasi1.jpg", use_container_width=True)
-        with c2: st.image("Dokumentasi2.jpg", use_container_width=True)
-        with c3: st.image("Dokumentasi3.jpg", use_container_width=True)
-        with c4: st.image("Dokumentasi4.jpg", use_container_width=True)
-        
-        # Grid 2: Foto 5 s/d 8
-        c5, c6, c7, c8 = st.columns(4)
-        with c5: st.image("Dokumentasi5.jpg", use_container_width=True)
-        with c6: st.image("Dokumentasi6.jpg", use_container_width=True)
-        with c7: st.image("Dokumentasi7.jpg", use_container_width=True)
-        with c8: st.image("Dokumentasi8.jpg", use_container_width=True)
-        
-        # Grid 3: Foto 9 s/d 12
-        c9, c10, c11, c12 = st.columns(4)
-        with c9: st.image("Dokumentasi9.jpg", use_container_width=True)
-        with c10: st.image("Dokumentasi10.jpg", use_container_width=True)
-        with c11: st.image("Dokumentasi12.jpg", use_container_width=True)
-        with c12: st.image("Dokumentasi11.jpg", use_container_width=True)
-        
-        # Grid 4: Foto 13 s/d 16
-        c13, c14, c15, c16 = st.columns(4)
-        with c13: st.image("Dokumentasi13.jpg", use_container_width=True)
-        with c14: st.image("Dokumentasi14.jpg", use_container_width=True)
-        with c15: st.image("Dokumentasi15.jpg", use_container_width=True)
-        with c16: st.image("Dokumentasi16.jpg", use_container_width=True)
-        
-        # Grid 5: Foto 17 s/d 20
-        c17, c18, c19, c20 = st.columns(4)
-        with c17: st.image("Dokumentasi17.jpg", use_container_width=True)
-        with c18: st.image("Dokumentasi18.jpg", use_container_width=True)
-        with c19: st.image("Dokumentasi19.jpg", use_container_width=True)
-        with c20: st.image("Dokumentasi20.jpg", use_container_width=True)
-        
-        # Grid 6: Foto 21 s/d 24
-        c21, c22, c23, c24 = st.columns(4)
-        with c21: st.image("Dokumentasi21.jpg", use_container_width=True)
-        with c22: st.image("Dokumentasi22.jpg", use_container_width=True)
-        with c23: st.image("Dokumentasi23.jpg", use_container_width=True)
-        with c24: st.image("Dokumentasi24.jpg", use_container_width=True)
-        
-        # Grid 7: Foto 25 s/d 28
-        c25, c26, c27, c28 = st.columns(4)
-        with c25: st.image("Dokumentasi25.jpg", use_container_width=True)
-        with c26: st.image("Dokumentasi26.jpg", use_container_width=True)
-        with c27: st.image("Dokumentasi27.jpg", use_container_width=True)
-        with c28: st.image("Dokumentasi28.jpg", use_container_width=True)
+        # Loop otomatis menggantikan sistem grid manual agar tahan dari crash error media file
+        idx_foto = 1
+        for _ in range(7): # 7 baris x 4 kolom = 28 foto
+            cols = st.columns(4)
+            for col in cols:
+                with col:
+                    tampilkan_gambar_aman(f"Dokumentasi{idx_foto}.jpg")
+                idx_foto += 1
 
 # ==================== MENU: LIHAT PRICELIST RESMI ====================
 elif menu == "💰 Lihat Price List Resmi 2026":
