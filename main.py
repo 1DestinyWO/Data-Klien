@@ -5,7 +5,7 @@ from datetime import datetime
 # 1. SETUP HALAMAN & TEMA UTAMA
 st.set_page_config(page_title="1 Destiny - Client Management Dashboard", layout="wide", page_icon="👰")
 
-# Custom CSS untuk membuat foto otomatis SQUARE (Kotak), membuang teks nama, dan mempercantik visual
+# Custom CSS Estetika & Format Kardus Harga
 st.markdown("""
     <style>
     .main {background-color: #f8f9fa;}
@@ -13,7 +13,7 @@ st.markdown("""
     .stButton>button {background-color: #4CAF50; color: white; border-radius: 8px; width: 100%;}
     .price-tag { background-color: #E8F5E9; padding: 12px; border-left: 5px solid #2E7D32; font-weight: bold; font-size: 18px; color: #1B5E20; margin: 10px 0;}
     
-    /* Trik CSS pas memaksa semua foto menjadi kotak / square simetris */
+    /* Trik CSS memaksa semua foto menjadi kotak / square simetris */
     img {
         width: 100% !important;
         height: 280px !important;
@@ -75,20 +75,51 @@ VENUE_PACKAGES = [
     {"Kota": "Jakarta", "Nama": "Taman Kajoe", "Prices": {"400pax": 209799000, "500pax": 222799000}, "Kapasitas": 1000, "Tipe": "Medium"}
 ]
 
+# 3. DATABASE VENDOR REKANAN DENGAN KOLOM DOKUMEN & PORTFOLIO GOOGLE DRIVE (SESUAI SCREENSHOT)
 VENDOR_LIST = [
-    {"Kategori": "Wedding planner/organizer", "Nama Vendor": "1 Destiny Wedding Organizer", "Instagram Link": "https://www.instagram.com/1destiny.wo/"},
-    {"Kategori": "Documentation", "Nama Vendor": "Aestec", "Instagram Link": "https://www.instagram.com/aestec.wedding/"},
-    {"Kategori": "Documentation", "Nama Vendor": "Camonphoto", "Instagram Link": "https://www.instagram.com/camonphoto/"},
-    {"Kategori": "Decoration", "Nama Vendor": "Fashdecor", "Instagram Link": "https://www.instagram.com/fashdecor.id/?hl=en"},
-    {"Kategori": "MUA & Attire", "Nama Vendor": "Micca Brides", "Instagram Link": "https://www.instagram.com/miccabrides/"},
-    {"Kategori": "MC", "Nama Vendor": "Mawadah", "Instagram Link": "https://www.instagram.com/mawadah_mc?igsh=Y2pkdXF0d2NlemQy/"},
-    {"Kategori": "MC", "Nama Vendor": "Mulyadi", "Instagram Link": "https://www.instagram.com/mulyadi_mc?igsh=NWY1ZWhpOWlkNGpk/"},
-    {"Kategori": "MC", "Nama Vendor": "Dewi MC", "Instagram Link": "https://www.instagram.com/dewinurmc?igsh=MW5xcjNiZGRldWxkeA=="},
-    {"Kategori": "MC", "Nama Vendor": "Uppeh", "Instagram Link": "https://www.instagram.com/uppeh.mc/"},
-    {"Kategori": "MC", "Nama Vendor": "Najibah", "Instagram Link": "https://www.instagram.com/najibahfauzii"},
-    {"Kategori": "Entertainment (Optional)", "Nama Vendor": "SWAG Project", "Instagram Link": "https://www.instagram.com/swag_project?igsh=a3A5YzgyZ3V3ZXBz"}
+    {
+        "Kategori": "Wedding planner/organizer", 
+        "Nama Vendor": "1 Destiny Wedding Organizer", 
+        "Instagram": "https://www.instagram.com/1destiny.wo/",
+        "Dokumen / GDrive": "-"
+    },
+    {
+        "Kategori": "Documentation", 
+        "Nama Vendor": "Aestec", 
+        "Instagram": "https://www.instagram.com/aestec.wedding/",
+        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i" target="_blank">📁 Buka Portfolio</a>'
+    },
+    {
+        "Kategori": "Documentation", 
+        "Nama Vendor": "Camonphoto", 
+        "Instagram": "https://www.instagram.com/camonphoto/",
+        "Dokumen / GDrive": '<a href="https://drive.google.com/drive/folders/1Lku_U-iZY3mh11m9i-BwH9LycXmSPnt" target="_blank">📁 Buka Portfolio</a>'
+    },
+    {
+        "Kategori": "Decoration", 
+        "Nama Vendor": "Fashdecor", 
+        "Instagram": "https://www.instagram.com/fashdecor.id/?hl=en",
+        "Dokumen / GDrive": "-"
+    },
+    {
+        "Kategori": "MUA & Attire", 
+        "Nama Vendor": "Micca Brides", 
+        "Instagram": "https://www.instagram.com/miccabrides/",
+        "Dokumen / GDrive": """
+            <a href="https://drive.google.com/drive/folders/1N-GSGPwlCyhcUdlvSF1o1uPPgzcgkK_L/" target="_blank">📑 Catalog Micca</a><br>
+            <a href="https://drive.google.com/drive/folders/10TcX5am4ZLWL_Umb1hG1zCHMkURq9u_i/" target="_blank">💄 MUA Bride</a><br>
+            <a href="https://drive.google.com/drive/folders/1aLYchVrKgc54et_pEJF9j0XpBsuDc9Ly" target="_blank">👩 MUA Mom</a>
+        """
+    },
+    {"Kategori": "MC", "Nama Vendor": "Mawadah", "Instagram": "https://www.instagram.com/mawadah_mc?igsh=Y2pkdXF0d2NlemQy/", "Dokumen / GDrive": "-"},
+    {"Kategori": "MC", "Nama Vendor": "Mulyadi", "Instagram": "https://www.instagram.com/mulyadi_mc?igsh=NWY1ZWhpOWlkNGpk/", "Dokumen / GDrive": "-"},
+    {"Kategori": "MC", "Nama Vendor": "Dewi MC", "Instagram": "https://www.instagram.com/dewinurmc?igsh=MW5xcjNiZGRldWxkeA==", "Dokumen / GDrive": "-"},
+    {"Kategori": "MC", "Nama Vendor": "Uppeh", "Instagram": "https://www.instagram.com/uppeh.mc/", "Dokumen / GDrive": "-"},
+    {"Kategori": "MC", "Nama Vendor": "Najibah", "Instagram": "https://www.instagram.com/najibahfauzii", "Dokumen / GDrive": "-"},
+    {"Kategori": "Entertainment (Optional)", "Nama Vendor": "SWAG Project", "Instagram": "https://www.instagram.com/swag_project?igsh=a3A5YzgyZ3V3ZXBz", "Dokumen / GDrive": "-"}
 ]
 
+# 4. INITIALIZE SIMULASI DATABASE KLIEN DI SESSION STATE
 if 'client_db' not in st.session_state:
     st.session_state.client_db = [
         {
@@ -100,6 +131,7 @@ if 'client_db' not in st.session_state:
         }
     ]
 
+# 5. SIDEBAR NAVIGATION
 st.sidebar.title("1 Destiny WO 2026")
 menu = st.sidebar.radio("Navigasi Konten:", [
     "📋 Lihat Summary Kebutuhan Klien", 
@@ -108,50 +140,52 @@ menu = st.sidebar.radio("Navigasi Konten:", [
     "🤝 Our Vendor List & Portfolio"
 ])
 
-# ==================== MENU: OUR VENDOR LIST & PORTFOLIO ====================
+# ==================== MENU: OUR VENDOR LIST & PORTFOLIO (SUDAH DIBENAHI) ====================
 if menu == "🤝 Our Vendor List & Portfolio":
     st.subheader("🤝 1 Destiny Official Vendor List & Portfolio (2026)")
     
-    tab_list, tab_galeri = st.tabs(["📋 Daftar Link Vendor", "📸 Galeri Foto Portfolio Terbaik"])
+    tab_list, tab_galeri = st.tabs(["📋 Daftar Vendor & Dokumen", "📸 Galeri Foto"])
     
     with tab_list:
-        st.info("Klik nama link Instagram berwarna biru untuk langsung melihat portofolio vendor rekanan di tab baru.")
+        st.info("Klik tombol 'Buka Instagram' atau link Google Drive di sebelah kanan untuk melihat kelengkapan dokumen.")
+        
+        # Mapping struktur kolom sesuai instruksi spreadsheet baru
         formatted_vendors = []
         for vendor in VENDOR_LIST:
             formatted_vendors.append({
-                "Kategori": vendor["Kategori"],
-                "Nama Vendor Rekanan": vendor["Nama Vendor"],
-                "Instagram Link Portofolio": f'<a href="{vendor["Instagram Link"]}" target="_blank">Buka Instagram</a>'
+                "Kategori / Item": vendor["Kategori"],
+                "Nama Vendor": vendor["Nama Vendor"],
+                "Link Instagram": f'<a href="{vendor["Instagram"]}" target="_blank">🔗 Buka Instagram</a>',
+                "Portfolio & Dokumen Resmi (Google Drive)": vendor["Dokumen / GDrive"]
             })
+            
         df_vendor = pd.DataFrame(formatted_vendors)
+        # Tampilkan tabel HTML interaktif agar link GDrive & IG bisa diklik langsung
         st.write(df_vendor.to_html(escape=False, index=False), unsafe_allow_html=True)
         
     with tab_galeri:
         st.markdown("### 🌟 Dokumentasi Real-Event Portfolio")
-        st.write("") # Memberi napas/spasi jarak atas
+        st.write("")
         
-        # Grid 1: Baris Pertama (Foto 1 s/d 4) - Teks Naming Dikosongkan
+        # Grid Foto Square
         c1, c2, c3, c4 = st.columns(4)
         with c1: st.image("Dokumentasi1.jpg", use_container_width=True)
         with c2: st.image("Dokumentasi2.jpg", use_container_width=True)
         with c3: st.image("Dokumentasi3.jpg", use_container_width=True)
         with c4: st.image("Dokumentasi4.jpg", use_container_width=True)
         
-        # Grid 2: Baris Kedua (Foto 5 s/d 8)
         c5, c6, c7, c8 = st.columns(4)
         with c5: st.image("Dokumentasi5.jpg", use_container_width=True)
         with c6: st.image("Dokumentasi6.jpg", use_container_width=True)
         with c7: st.image("Dokumentasi7.jpg", use_container_width=True)
         with c8: st.image("Dokumentasi8.jpg", use_container_width=True)
         
-        # Grid 3: Baris Ketiga (Foto 9 s/d 12)
         c9, c10, c11, c12 = st.columns(4)
         with c9: st.image("Dokumentasi9.jpg", use_container_width=True)
         with c10: st.image("Dokumentasi10.jpg", use_container_width=True)
-        with c11: st.image("Dokumentasi11.jpg", use_container_width=True)
-        with c12: st.image("Dokumentasi12.jpg", use_container_width=True)
+        with c11: st.image("Dokumentasi12.jpg", use_container_width=True)
+        with c12: st.image("Dokumentasi11.jpg", use_container_width=True)
         
-        # Grid 4: Baris Keempat (Foto 13 s/d 14)
         c13, c14, _, _ = st.columns(4)
         with c13: st.image("Dokumentasi13.jpg", use_container_width=True)
         with c14: st.image("Dokumentasi14.jpg", use_container_width=True)
