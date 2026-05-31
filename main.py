@@ -5,23 +5,31 @@ from datetime import datetime
 # 1. SETUP HALAMAN & TEMA UTAMA
 st.set_page_config(page_title="1 Destiny - Client Management Dashboard", layout="wide", page_icon="👰")
 
-# Custom CSS Estetika & Format Kardus Harga
+# Custom CSS untuk membuat foto otomatis SQUARE (Kotak), membuang teks nama, dan mempercantik visual
 st.markdown("""
     <style>
     .main {background-color: #f8f9fa;}
     div[data-testid="stMetricValue"] {font-size: 22px; color: #1E88E5;}
     .stButton>button {background-color: #4CAF50; color: white; border-radius: 8px; width: 100%;}
     .price-tag { background-color: #E8F5E9; padding: 12px; border-left: 5px solid #2E7D32; font-weight: bold; font-size: 18px; color: #1B5E20; margin: 10px 0;}
+    
+    /* Trik CSS pas memaksa semua foto menjadi kotak / square simetris */
+    img {
+        width: 100% !important;
+        height: 280px !important;
+        object-fit: cover !important;
+        border-radius: 12px !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# Fungsi pembantu untuk memformat angka menjadi Rupiah (Contoh: Rp 110.499.000)
+# Fungsi pembantu untuk memformat angka menjadi Rupiah
 def format_rupiah(angka):
     if isinstance(angka, (int, float)):
         return f"Rp {angka:,.0f}".replace(",", ".")
     return str(angka)
 
-# 2. DATABASE INTERNAL PRICELIST 2026 (Sesuai Brosur Resmi)
+# 2. DATABASE INTERNAL PRICELIST 2026
 PRICELIST_PACKAGES = {
     "Exclude Venue & Catering": [
         {
@@ -67,7 +75,6 @@ VENUE_PACKAGES = [
     {"Kota": "Jakarta", "Nama": "Taman Kajoe", "Prices": {"400pax": 209799000, "500pax": 222799000}, "Kapasitas": 1000, "Tipe": "Medium"}
 ]
 
-# 3. DATABASE VENDOR REKANAN RESMI
 VENDOR_LIST = [
     {"Kategori": "Wedding planner/organizer", "Nama Vendor": "1 Destiny Wedding Organizer", "Instagram Link": "https://www.instagram.com/1destiny.wo/"},
     {"Kategori": "Documentation", "Nama Vendor": "Aestec", "Instagram Link": "https://www.instagram.com/aestec.wedding/"},
@@ -82,7 +89,6 @@ VENDOR_LIST = [
     {"Kategori": "Entertainment (Optional)", "Nama Vendor": "SWAG Project", "Instagram Link": "https://www.instagram.com/swag_project?igsh=a3A5YzgyZ3V3ZXBz"}
 ]
 
-# 4. INITIALIZE SIMULASI DATABASE KLIEN DI SESSION STATE
 if 'client_db' not in st.session_state:
     st.session_state.client_db = [
         {
@@ -94,7 +100,6 @@ if 'client_db' not in st.session_state:
         }
     ]
 
-# 5. SIDEBAR UTAMA NAVIGATION
 st.sidebar.title("1 Destiny WO 2026")
 menu = st.sidebar.radio("Navigasi Konten:", [
     "📋 Lihat Summary Kebutuhan Klien", 
@@ -123,33 +128,33 @@ if menu == "🤝 Our Vendor List & Portfolio":
         
     with tab_galeri:
         st.markdown("### 🌟 Dokumentasi Real-Event Portfolio")
-        st.caption("Gunakan foto galeri di bawah ini sebagai referensi visual visualisasi tema acara ke calon pengantin.")
+        st.write("") # Memberi napas/spasi jarak atas
         
-        # Grid 1: Baris Pertama (Foto 1 s/d 4)
+        # Grid 1: Baris Pertama (Foto 1 s/d 4) - Teks Naming Dikosongkan
         c1, c2, c3, c4 = st.columns(4)
-        with c1: st.image("Dokumentasi1.jpg", caption="Portfolio Event 1", use_container_width=True)
-        with c2: st.image("Dokumentasi2.jpg", caption="Portfolio Event 2", use_container_width=True)
-        with c3: st.image("Dokumentasi3.jpg", caption="Portfolio Event 3", use_container_width=True)
-        with c4: st.image("Dokumentasi4.jpg", caption="Portfolio Event 4", use_container_width=True)
+        with c1: st.image("Dokumentasi1.jpg", use_container_width=True)
+        with c2: st.image("Dokumentasi2.jpg", use_container_width=True)
+        with c3: st.image("Dokumentasi3.jpg", use_container_width=True)
+        with c4: st.image("Dokumentasi4.jpg", use_container_width=True)
         
         # Grid 2: Baris Kedua (Foto 5 s/d 8)
         c5, c6, c7, c8 = st.columns(4)
-        with c5: st.image("Dokumentasi5.jpg", caption="Portfolio Event 5", use_container_width=True)
-        with c6: st.image("Dokumentasi6.jpg", caption="Portfolio Event 6", use_container_width=True)
-        with c7: st.image("Dokumentasi7.jpg", caption="Portfolio Event 7", use_container_width=True)
-        with c8: st.image("Dokumentasi8.jpg", caption="Portfolio Event 8", use_container_width=True)
+        with c5: st.image("Dokumentasi5.jpg", use_container_width=True)
+        with c6: st.image("Dokumentasi6.jpg", use_container_width=True)
+        with c7: st.image("Dokumentasi7.jpg", use_container_width=True)
+        with c8: st.image("Dokumentasi8.jpg", use_container_width=True)
         
         # Grid 3: Baris Ketiga (Foto 9 s/d 12)
         c9, c10, c11, c12 = st.columns(4)
-        with c9: st.image("Dokumentasi9.jpg", caption="Portfolio Event 9", use_container_width=True)
-        with c10: st.image("Dokumentasi10.jpg", caption="Portfolio Event 10", use_container_width=True)
-        with c11: st.image("Dokumentasi11.jpg", caption="Portfolio Event 11", use_container_width=True)
-        with c12: st.image("Dokumentasi12.jpg", caption="Portfolio Event 12", use_container_width=True)
+        with c9: st.image("Dokumentasi9.jpg", use_container_width=True)
+        with c10: st.image("Dokumentasi10.jpg", use_container_width=True)
+        with c11: st.image("Dokumentasi11.jpg", use_container_width=True)
+        with c12: st.image("Dokumentasi12.jpg", use_container_width=True)
         
         # Grid 4: Baris Keempat (Foto 13 s/d 14)
         c13, c14, _, _ = st.columns(4)
-        with c13: st.image("Dokumentasi13.jpg", caption="Portfolio Event 13", use_container_width=True)
-        with c14: st.image("Dokumentasi14.jpg", caption="Portfolio Event 14", use_container_width=True)
+        with c13: st.image("Dokumentasi13.jpg", use_container_width=True)
+        with c14: st.image("Dokumentasi14.jpg", use_container_width=True)
 
 # ==================== MENU: LIHAT PRICELIST RESMI ====================
 elif menu == "💰 Lihat Price List Resmi 2026":
@@ -201,7 +206,6 @@ elif menu == "➕ Input Klien Baru (Form Skrining Baru)":
             
         submit_btn = st.form_submit_button("🚀 Simpan Hasil Skrining")
         if submit_btn and p_wanita and p_pria:
-            # Otomatisasi pembentukan nama label tanpa perlu input manual
             auto_label = f"Skrining - {p_wanita.split()[0]} & {p_pria.split()[0]}"
             new_data = {
                 "Nama Klien": auto_label, "Pengantin Wanita": p_wanita, "Pengantin Pria": p_pria,
